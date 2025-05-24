@@ -1,0 +1,269 @@
+{
+  "version": 3,
+  "targets": {
+    "net9.0-windows7.0": {
+      "DalamudPackager/12.0.0": {
+        "type": "package",
+        "build": {
+          "build/DalamudPackager.props": {},
+          "build/DalamudPackager.targets": {}
+        },
+        "buildMultiTargeting": {
+          "buildMultiTargeting/DalamudPackager.props": {}
+        }
+      },
+      "DotNet.ReproducibleBuilds/1.2.25": {
+        "type": "package",
+        "build": {
+          "buildTransitive/DotNet.ReproducibleBuilds.props": {},
+          "buildTransitive/DotNet.ReproducibleBuilds.targets": {}
+        },
+        "buildMultiTargeting": {
+          "buildMultiTargeting/DotNet.ReproducibleBuilds.props": {},
+          "buildMultiTargeting/DotNet.ReproducibleBuilds.targets": {}
+        }
+      },
+      "Microsoft.IO.RecyclableMemoryStream/3.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/Microsoft.IO.RecyclableMemoryStream.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.IO.RecyclableMemoryStream.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "SixLabors.ImageSharp/3.1.8": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/SixLabors.ImageSharp.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/SixLabors.ImageSharp.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "build/SixLabors.ImageSharp.props": {}
+        }
+      },
+      "SixLabors.ImageSharp.Web/3.1.5": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.IO.RecyclableMemoryStream": "3.0.1",
+          "SixLabors.ImageSharp": "3.1.8"
+        },
+        "compile": {
+          "lib/net6.0/SixLabors.ImageSharp.Web.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/SixLabors.ImageSharp.Web.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ],
+        "build": {
+          "build/SixLabors.ImageSharp.Web.props": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "DalamudPackager/12.0.0": {
+      "sha512": "J5TJLV3f16T/E2H2P17ClWjtfEBPpq3yxvqW46eN36JCm6wR+EaoaYkqG9Rm5sHqs3/nK/vKjWWyvEs/jhKoXw==",
+      "type": "package",
+      "path": "dalamudpackager/12.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "build/DalamudPackager.props",
+        "build/DalamudPackager.targets",
+        "buildMultiTargeting/DalamudPackager.props",
+        "dalamudpackager.12.0.0.nupkg.sha512",
+        "dalamudpackager.nuspec",
+        "tasks/net48/DalamudPackager.dll",
+        "tasks/net48/Newtonsoft.Json.dll",
+        "tasks/net48/YamlDotNet.dll",
+        "tasks/netstandard2.1/DalamudPackager.dll",
+        "tasks/netstandard2.1/Newtonsoft.Json.dll",
+        "tasks/netstandard2.1/YamlDotNet.dll"
+      ]
+    },
+    "DotNet.ReproducibleBuilds/1.2.25": {
+      "sha512": "xCXiw7BCxHJ8pF6wPepRUddlh2dlQlbr81gXA72hdk4FLHkKXas7EH/n+fk5UCA/YfMqG1Z6XaPiUjDbUNBUzg==",
+      "type": "package",
+      "path": "dotnet.reproduciblebuilds/1.2.25",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "build/DotNet.ReproducibleBuilds.props",
+        "build/DotNet.ReproducibleBuilds.targets",
+        "buildMultiTargeting/DotNet.ReproducibleBuilds.props",
+        "buildMultiTargeting/DotNet.ReproducibleBuilds.targets",
+        "buildTransitive/DotNet.ReproducibleBuilds.props",
+        "buildTransitive/DotNet.ReproducibleBuilds.targets",
+        "dotnet.reproduciblebuilds.1.2.25.nupkg.sha512",
+        "dotnet.reproduciblebuilds.nuspec"
+      ]
+    },
+    "Microsoft.IO.RecyclableMemoryStream/3.0.1": {
+      "sha512": "s/s20YTVY9r9TPfTrN5g8zPF1YhwxyqO6PxUkrYTGI2B+OGPe9AdajWZrLhFqXIvqIW23fnUE4+ztrUWNU1+9g==",
+      "type": "package",
+      "path": "microsoft.io.recyclablememorystream/3.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/net6.0/Microsoft.IO.RecyclableMemoryStream.dll",
+        "lib/net6.0/Microsoft.IO.RecyclableMemoryStream.xml",
+        "lib/netstandard2.0/Microsoft.IO.RecyclableMemoryStream.dll",
+        "lib/netstandard2.0/Microsoft.IO.RecyclableMemoryStream.xml",
+        "lib/netstandard2.1/Microsoft.IO.RecyclableMemoryStream.dll",
+        "lib/netstandard2.1/Microsoft.IO.RecyclableMemoryStream.xml",
+        "microsoft.io.recyclablememorystream.3.0.1.nupkg.sha512",
+        "microsoft.io.recyclablememorystream.nuspec"
+      ]
+    },
+    "SixLabors.ImageSharp/3.1.8": {
+      "sha512": "8eJkROLGh6DBQLR666q2aOpAaean2puZaZ6Ur9YxoyGzjaZhv8OJSxtnDou54+OXMkXtLUdyQC0so47sOsqZjg==",
+      "type": "package",
+      "path": "sixlabors.imagesharp/3.1.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "build/SixLabors.ImageSharp.props",
+        "lib/net6.0/SixLabors.ImageSharp.dll",
+        "lib/net6.0/SixLabors.ImageSharp.xml",
+        "sixlabors.imagesharp.128.png",
+        "sixlabors.imagesharp.3.1.8.nupkg.sha512",
+        "sixlabors.imagesharp.nuspec"
+      ]
+    },
+    "SixLabors.ImageSharp.Web/3.1.5": {
+      "sha512": "xC0gpnV14tY1fXtmhOoyhqf0XSy9g48wLzRS89SRgOHkO8enLJDjATv4ghklSsjMtRZuseYHkYXGty80Jp2Eow==",
+      "type": "package",
+      "path": "sixlabors.imagesharp.web/3.1.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "build/SixLabors.ImageSharp.Web.props",
+        "lib/net6.0/SixLabors.ImageSharp.Web.dll",
+        "lib/net6.0/SixLabors.ImageSharp.Web.xml",
+        "sixlabors.imagesharp.web.128.png",
+        "sixlabors.imagesharp.web.3.1.5.nupkg.sha512",
+        "sixlabors.imagesharp.web.nuspec"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net9.0-windows7.0": [
+      "DalamudPackager >= 12.0.0",
+      "DotNet.ReproducibleBuilds >= 1.2.25",
+      "SixLabors.ImageSharp >= 3.1.8",
+      "SixLabors.ImageSharp.Web >= 3.1.5"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\Shawn\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\Shawn\\Desktop\\WDIGViewer project folder\\WDIGViewer\\WDIGViewer\\WDIGViewer.csproj",
+      "projectName": "WDIGViewer",
+      "projectPath": "C:\\Users\\Shawn\\Desktop\\WDIGViewer project folder\\WDIGViewer\\WDIGViewer\\WDIGViewer.csproj",
+      "packagesPath": "C:\\Users\\Shawn\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Shawn\\Desktop\\WDIGViewer project folder\\WDIGViewer\\WDIGViewer\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\Shawn\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net9.0-windows"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net9.0-windows7.0": {
+          "targetAlias": "net9.0-windows",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreLockProperties": {
+        "restorePackagesWithLockFile": "true"
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "9.0.200"
+    },
+    "frameworks": {
+      "net9.0-windows7.0": {
+        "targetAlias": "net9.0-windows",
+        "dependencies": {
+          "DalamudPackager": {
+            "target": "Package",
+            "version": "[12.0.0, )"
+          },
+          "DotNet.ReproducibleBuilds": {
+            "suppressParent": "All",
+            "target": "Package",
+            "version": "[1.2.25, )"
+          },
+          "SixLabors.ImageSharp": {
+            "target": "Package",
+            "version": "[3.1.8, )"
+          },
+          "SixLabors.ImageSharp.Web": {
+            "target": "Package",
+            "version": "[3.1.5, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

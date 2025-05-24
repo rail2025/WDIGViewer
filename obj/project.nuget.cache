@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "BndqGrMQQno=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Shawn\\Desktop\\WDIGViewer project folder\\WDIGViewer\\WDIGViewer\\WDIGViewer.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Shawn\\.nuget\\packages\\dalamudpackager\\12.0.0\\dalamudpackager.12.0.0.nupkg.sha512",
+    "C:\\Users\\Shawn\\.nuget\\packages\\dotnet.reproduciblebuilds\\1.2.25\\dotnet.reproduciblebuilds.1.2.25.nupkg.sha512",
+    "C:\\Users\\Shawn\\.nuget\\packages\\microsoft.io.recyclablememorystream\\3.0.1\\microsoft.io.recyclablememorystream.3.0.1.nupkg.sha512",
+    "C:\\Users\\Shawn\\.nuget\\packages\\sixlabors.imagesharp\\3.1.8\\sixlabors.imagesharp.3.1.8.nupkg.sha512",
+    "C:\\Users\\Shawn\\.nuget\\packages\\sixlabors.imagesharp.web\\3.1.5\\sixlabors.imagesharp.web.3.1.5.nupkg.sha512"
+  ],
+  "logs": []
+}

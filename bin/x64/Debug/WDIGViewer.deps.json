@@ -1,0 +1,94 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "WDIGViewer/1.0.0.0": {
+        "dependencies": {
+          "DalamudPackager": "12.0.0",
+          "DotNet.ReproducibleBuilds": "1.2.25",
+          "SixLabors.ImageSharp": "3.1.8",
+          "SixLabors.ImageSharp.Web": "3.1.5"
+        },
+        "runtime": {
+          "WDIGViewer.dll": {}
+        }
+      },
+      "DalamudPackager/12.0.0": {},
+      "DotNet.ReproducibleBuilds/1.2.25": {},
+      "Microsoft.IO.RecyclableMemoryStream/3.0.1": {
+        "runtime": {
+          "lib/net6.0/Microsoft.IO.RecyclableMemoryStream.dll": {
+            "assemblyVersion": "3.0.1.0",
+            "fileVersion": "3.0.1.0"
+          }
+        }
+      },
+      "SixLabors.ImageSharp/3.1.8": {
+        "runtime": {
+          "lib/net6.0/SixLabors.ImageSharp.dll": {
+            "assemblyVersion": "3.0.0.0",
+            "fileVersion": "3.1.8.0"
+          }
+        }
+      },
+      "SixLabors.ImageSharp.Web/3.1.5": {
+        "dependencies": {
+          "Microsoft.IO.RecyclableMemoryStream": "3.0.1",
+          "SixLabors.ImageSharp": "3.1.8"
+        },
+        "runtime": {
+          "lib/net6.0/SixLabors.ImageSharp.Web.dll": {
+            "assemblyVersion": "3.0.0.0",
+            "fileVersion": "3.1.5.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "WDIGViewer/1.0.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "DalamudPackager/12.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-J5TJLV3f16T/E2H2P17ClWjtfEBPpq3yxvqW46eN36JCm6wR+EaoaYkqG9Rm5sHqs3/nK/vKjWWyvEs/jhKoXw==",
+      "path": "dalamudpackager/12.0.0",
+      "hashPath": "dalamudpackager.12.0.0.nupkg.sha512"
+    },
+    "DotNet.ReproducibleBuilds/1.2.25": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-xCXiw7BCxHJ8pF6wPepRUddlh2dlQlbr81gXA72hdk4FLHkKXas7EH/n+fk5UCA/YfMqG1Z6XaPiUjDbUNBUzg==",
+      "path": "dotnet.reproduciblebuilds/1.2.25",
+      "hashPath": "dotnet.reproduciblebuilds.1.2.25.nupkg.sha512"
+    },
+    "Microsoft.IO.RecyclableMemoryStream/3.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-s/s20YTVY9r9TPfTrN5g8zPF1YhwxyqO6PxUkrYTGI2B+OGPe9AdajWZrLhFqXIvqIW23fnUE4+ztrUWNU1+9g==",
+      "path": "microsoft.io.recyclablememorystream/3.0.1",
+      "hashPath": "microsoft.io.recyclablememorystream.3.0.1.nupkg.sha512"
+    },
+    "SixLabors.ImageSharp/3.1.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-8eJkROLGh6DBQLR666q2aOpAaean2puZaZ6Ur9YxoyGzjaZhv8OJSxtnDou54+OXMkXtLUdyQC0so47sOsqZjg==",
+      "path": "sixlabors.imagesharp/3.1.8",
+      "hashPath": "sixlabors.imagesharp.3.1.8.nupkg.sha512"
+    },
+    "SixLabors.ImageSharp.Web/3.1.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-xC0gpnV14tY1fXtmhOoyhqf0XSy9g48wLzRS89SRgOHkO8enLJDjATv4ghklSsjMtRZuseYHkYXGty80Jp2Eow==",
+      "path": "sixlabors.imagesharp.web/3.1.5",
+      "hashPath": "sixlabors.imagesharp.web.3.1.5.nupkg.sha512"
+    }
+  }
+}
