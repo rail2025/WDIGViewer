@@ -1,3 +1,4 @@
+[
  {
     "Author": "rail",
     "Name": "WDIGViewer",
@@ -21,3 +22,4 @@
     "SupportsProfiles": true,
     "IconUrl": "https://raw.githubusercontent.com/rail2025/WDIGViewer/main/icon.png"
   }
+]
