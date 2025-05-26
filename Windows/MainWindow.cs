@@ -31,7 +31,7 @@ namespace WDIGViewer.Windows
                 MinimumSize = new Vector2(500, 550),
                 MaximumSize = new Vector2(float.MaxValue, float.MaxValue)
             };
-            this.Flags = ImGuiWindowFlags.NoScrollbar | ImGuiWindowFlags.NoScrollWithMouse;
+            this.Flags = ImGuiWindowFlags.NoScrollWithMouse;
         }
 
         public void Dispose() { }
@@ -49,7 +49,9 @@ namespace WDIGViewer.Windows
         public override void Draw()
         {
             DrawStrategySelector();
-            ImGui.Spacing(); ImGui.Separator(); ImGui.Spacing();
+            ImGui.Spacing();
+            ImGui.Separator();
+            ImGui.Spacing();
 
             if (selectedStrategy != null)
             {
@@ -62,50 +64,72 @@ namespace WDIGViewer.Windows
                 }
                 ImGui.EndChild();
             }
-            else ImGui.Text("Please select a strategy from the dropdown.");
+            else
+            {
+                ImGui.Text("Please select a strategy from the dropdown.");
+            }
 
             ImGui.Separator();
-            if (ImGui.Button("Settings")) pluginInstance.ToggleConfigUI();
+            if (ImGui.Button("Settings"))
+            {
+                pluginInstance.ToggleConfigUI();
+            }
             ImGui.SameLine();
-            if (ImGui.Button("Reload All Images")) pluginInstance.ReloadStrategies();
+            if (ImGui.Button("Reload All Images"))
+            {
+                pluginInstance.ReloadStrategies();
+            }
         }
 
         private void DrawStrategySelector()
         {
-            ImGui.Text("Strategy:"); ImGui.SameLine();
+            ImGui.Text("Strategy:");
+            ImGui.SameLine();
             ImGui.SetNextItemWidth(ImGui.GetContentRegionAvail().X);
+
             if (ImGui.BeginCombo("##StrategySelect", selectedStrategyComboPreview, ImGuiComboFlags.HeightLargest))
             {
-                if (!activeStrategies.Any()) ImGui.TextUnformatted("No strategies loaded. Check folders or settings.");
+                if (!activeStrategies.Any())
+                {
+                    ImGui.TextUnformatted("No strategies loaded. Check folders or settings.");
+                }
                 else
                 {
                     int flatIndex = 0;
                     var grouped = activeStrategies.GroupBy(s => s.Source).OrderBy(g => g.Key.ToString());
+
                     foreach (var group in grouped)
                     {
                         if (ImGui.TreeNodeEx(group.Key.ToString(), ImGuiTreeNodeFlags.DefaultOpen | ImGuiTreeNodeFlags.SpanAvailWidth))
                         {
-                            foreach (var strategy in group.OrderBy(s => s.Name))
+                            var strategiesInGroup = group.OrderBy(s => s.Name).ToList();
+                            foreach (var strategy in strategiesInGroup)
                             {
-                                bool isSelected = (selectedStrategyGlobalIndex == flatIndex);
-                                if (ImGui.Selectable(strategy.Name, isSelected))
+                                bool isSelectedUi = (selectedStrategyGlobalIndex == flatIndex);
+                                if (ImGui.Selectable(strategy.Name, isSelectedUi))
                                 {
                                     if (selectedStrategy != strategy)
                                     {
                                         selectedStrategy = strategy;
                                         selectedStrategyGlobalIndex = flatIndex;
-                                        selectedStrategyComboPreview = $"{strategy.Name} ({strategy.Source})";
+                                        selectedStrategyComboPreview = $"{(strategy.Name ?? "Unknown")} ({(strategy.Source.ToString() ?? "Unknown")})";
                                         currentPhase = strategy.Phases.FirstOrDefault();
                                         currentPhaseImageIndex = 0;
                                         LoadImagesForCurrentPhase();
                                     }
                                 }
-                                if (isSelected) ImGui.SetItemDefaultFocus();
+                                if (isSelectedUi)
+                                {
+                                    ImGui.SetItemDefaultFocus();
+                                }
                                 flatIndex++;
                             }
                             ImGui.TreePop();
                         }
-                        else flatIndex += group.Count();
+                        else
+                        {
+                            flatIndex += group.Count();
+                        }
                     }
                 }
                 ImGui.EndCombo();
@@ -115,22 +139,38 @@ namespace WDIGViewer.Windows
         private void DrawPhaseTabs()
         {
             if (selectedStrategy == null || !selectedStrategy.Phases.Any()) return;
-            if (ImGui.BeginTabBar("PhaseTabs", ImGuiTabBarFlags.None))
+
+            if (ImGui.BeginTabBar("PhaseTabs", ImGuiTabBarFlags.FittingPolicyScroll))
             {
-                foreach (var phase in selectedStrategy.Phases.OrderBy(p => p.Name))
+                var phasesToDraw = selectedStrategy.Phases.OrderBy(p => p.Name).ToList();
+                bool phaseWasChangedByClickThisFrame = false;
+
+                foreach (var phase in phasesToDraw)
                 {
-                    bool tabSelected = (currentPhase == phase);
-                    if (ImGui.BeginTabItem(phase.Name, ref tabSelected, (currentPhase == phase) ? ImGuiTabItemFlags.SetSelected : ImGuiTabItemFlags.None))
+                    string tabDisplayName = phase.Name;
+
+                    // Use the simplest ImGui.BeginTabItem overload.
+                    // This returns true if this tab is the currently selected one.
+                    if (ImGui.BeginTabItem(tabDisplayName))
                     {
-                        ImGui.EndTabItem();
-                    }
-                    if (tabSelected && currentPhase != phase)
-                    {
-                        currentPhase = phase;
-                        currentPhaseImageIndex = 0;
-                        LoadImagesForCurrentPhase();
+                        // If ImGui indicates this tab is now selected, and it's different from our logical currentPhase,
+                        // it means the user clicked this tab (or it's the first tab being auto-selected).
+                        if (currentPhase != phase)
+                        {
+                            currentPhase = phase;
+                            currentPhaseImageIndex = 0;
+                            phaseWasChangedByClickThisFrame = true;
+                        }
+                        ImGui.EndTabItem(); // Must be called if BeginTabItem returned true
                     }
                 }
+
+                // If a phase was changed as a result of a tab click, load its images.
+                if (phaseWasChangedByClickThisFrame)
+                {
+                    LoadImagesForCurrentPhase();
+                }
+
                 ImGui.EndTabBar();
             }
         }
@@ -142,13 +182,25 @@ namespace WDIGViewer.Windows
 
         private void DrawPhaseContent()
         {
-            if (currentPhase == null) { ImGui.Text("Select a phase."); return; }
-            if (!currentPhase.Images.Any()) { ImGui.Text($"No images found for {currentPhase.Name}."); return; }
+            if (currentPhase == null)
+            {
+                ImGui.Text("Select a phase.");
+                return;
+            }
+            if (!currentPhase.Images.Any())
+            {
+                ImGui.Text($"No images found for {currentPhase.Name}.");
+                return;
+            }
 
             if (currentPhaseImageIndex < 0 || currentPhaseImageIndex >= currentPhase.Images.Count)
             {
                 currentPhaseImageIndex = 0;
-                if (!currentPhase.Images.Any()) { ImGui.Text("No images available."); return; }
+                if (!currentPhase.Images.Any())
+                {
+                    ImGui.Text("No images available.");
+                    return;
+                }
             }
 
             currentPhase.CurrentImageIndex = currentPhaseImageIndex;
@@ -167,7 +219,10 @@ namespace WDIGViewer.Windows
                 }
 
                 Vector2 contentSize = ImGui.GetContentRegionAvail();
-                if (currentPhase.Images.Count > 1) contentSize.Y -= (ImGui.GetFrameHeightWithSpacing() + ImGui.GetStyle().ItemSpacing.Y);
+                if (currentPhase.Images.Count > 1)
+                {
+                    contentSize.Y -= (ImGui.GetFrameHeightWithSpacing() + ImGui.GetStyle().ItemSpacing.Y);
+                }
 
                 float aspectRatio = imgWidth / imgHeight;
                 Vector2 displaySize = new Vector2(contentSize.X, contentSize.X / aspectRatio);
@@ -181,35 +236,58 @@ namespace WDIGViewer.Windows
                 displaySize.Y = Math.Max(1f, displaySize.Y);
 
                 float cursorPosX = (contentSize.X - displaySize.X) * 0.5f;
-                if (cursorPosX > 0) ImGui.SetCursorPosX(ImGui.GetCursorPosX() + cursorPosX);
+                if (cursorPosX > 0)
+                {
+                    ImGui.SetCursorPosX(ImGui.GetCursorPosX() + cursorPosX);
+                }
 
                 float availableDrawingHeight = contentSize.Y;
                 float cursorPosY = (availableDrawingHeight - displaySize.Y) * 0.5f;
-                if (cursorPosY > 0 && availableDrawingHeight > displaySize.Y) ImGui.SetCursorPosY(ImGui.GetCursorPosY() + cursorPosY);
+                if (cursorPosY > 0 && availableDrawingHeight > displaySize.Y)
+                {
+                    ImGui.SetCursorPosY(ImGui.GetCursorPosY() + cursorPosY);
+                }
 
                 ImGui.Image(textureHandle, displaySize);
             }
             else if (imageAsset != null)
             {
                 ImGui.Text($"Texture not loaded for: {Path.GetFileName(imageAsset.FilePath)}");
-                if (!System.IO.File.Exists(imageAsset.FilePath)) ImGui.TextColored(new Vector4(1, 0, 0, 1), "Error: Image file not found at path.");
-                else ImGui.TextColored(new Vector4(1, 1, 0, 1), " (Image format might not be supported by TextureProvider or image is invalid)");
+                if (!File.Exists(imageAsset.FilePath))
+                {
+                    ImGui.TextColored(new Vector4(1, 0, 0, 1), "Error: Image file not found at path.");
+                }
+                else
+                {
+                    ImGui.TextColored(new Vector4(1, 1, 0, 1), " (Image format might not be supported or image is invalid)");
+                }
             }
-            else ImGui.Text("No image to display for this selection.");
+            else
+            {
+                ImGui.Text("No image to display for this selection.");
+            }
 
             if (currentPhase.Images.Count > 1)
             {
                 ImGui.Spacing();
                 string pageText = $"{currentPhaseImageIndex + 1} / {currentPhase.Images.Count}";
-                float pageControlsTotalWidth = ImGui.CalcTextSize("Previous").X + ImGui.GetStyle().ItemSpacing.X + ImGui.CalcTextSize(pageText).X + ImGui.GetStyle().ItemSpacing.X + ImGui.CalcTextSize("Next").X + ImGui.GetStyle().FramePadding.X * 4;
+                float pageControlsTotalWidth = ImGui.CalcTextSize("Previous").X + ImGui.GetStyle().ItemSpacing.X +
+                                               ImGui.CalcTextSize(pageText).X + ImGui.GetStyle().ItemSpacing.X +
+                                               ImGui.CalcTextSize("Next").X + (ImGui.GetStyle().FramePadding.X * 4);
+
                 float indentX = (ImGui.GetContentRegionAvail().X - pageControlsTotalWidth) * 0.5f;
-                if (indentX > 0) ImGui.SetCursorPosX(ImGui.GetCursorPosX() + indentX);
+                if (indentX > 0)
+                {
+                    ImGui.SetCursorPosX(ImGui.GetCursorPosX() + indentX);
+                }
 
                 if (ImGui.Button("Previous"))
                 {
                     if (currentPhaseImageIndex > 0) currentPhaseImageIndex--;
                 }
-                ImGui.SameLine(); ImGui.TextUnformatted(pageText); ImGui.SameLine();
+                ImGui.SameLine();
+                ImGui.TextUnformatted(pageText);
+                ImGui.SameLine();
                 if (ImGui.Button("Next"))
                 {
                     if (currentPhaseImageIndex < currentPhase.Images.Count - 1) currentPhaseImageIndex++;

@@ -80,17 +80,48 @@ namespace WDIGViewer
         {
             try
             {
+                Log.Info($"Scanning base path: {basePath} for source type: {sourceType}");
                 foreach (var fightDir in Directory.GetDirectories(basePath))
                 {
+                    Log.Info($"Found fight directory: {fightDir}");
                     var strategy = new FightStrategy(new DirectoryInfo(fightDir).Name, sourceType, fightDir);
-                    foreach (var phaseDir in Directory.GetDirectories(fightDir).OrderBy(d => d))
+                    var phaseDirs = Directory.GetDirectories(fightDir).OrderBy(d => d).ToList();
+                    Log.Info($"-- Found {phaseDirs.Count} potential phase directories for {strategy.Name}");
+
+                    foreach (var phaseDir in phaseDirs)
                     {
+                        Log.Info($"---- Processing phase directory: {phaseDir}");
                         var phase = new FightPhase(new DirectoryInfo(phaseDir).Name);
-                        foreach (var imageFile in Directory.GetFiles(phaseDir).Where(f => IsSupportedImageFile(f)).OrderBy(f => f))
-                        { phase.Images.Add(new ImageAsset(imageFile)); }
-                        if (phase.Images.Any()) strategy.Phases.Add(phase);
+                        var imageFilesInDir = Directory.GetFiles(phaseDir).ToList();
+                        Log.Info($"------ Found {imageFilesInDir.Count} files in {phaseDir} before filtering.");
+
+                        foreach (var imageFile in imageFilesInDir)
+                        {
+                            Log.Debug($"-------- Checking file: {imageFile}");
+                            bool isSupported = IsSupportedImageFile(imageFile);
+                            Log.Debug($"-------- IsSupportedFile('{imageFile}') returned: {isSupported}");
+                            if (isSupported)
+                            {
+                                phase.Images.Add(new ImageAsset(imageFile));
+                            }
+                        }
+                        Log.Info($"------ Phase '{phase.Name}' has {phase.Images.Count} supported images.");
+
+                        if (phase.Images.Any())
+                        {
+                            strategy.Phases.Add(phase);
+                            Log.Info($"------ Added phase '{phase.Name}' to strategy '{strategy.Name}'.");
+                        }
+                        else
+                        {
+                            Log.Info($"------ Skipped adding phase '{phase.Name}' (no supported images) to strategy '{strategy.Name}'.");
+                        }
                     }
-                    if (strategy.Phases.Any()) AllStrategies.Add(strategy);
+                    Log.Info($"-- Strategy '{strategy.Name}' has {strategy.Phases.Count} total phases added.");
+                    if (strategy.Phases.Any())
+                    {
+                        AllStrategies.Add(strategy);
+                    }
                 }
             }
             catch (Exception ex) { Log.Error($"Error scanning {basePath} for {sourceType}: {ex.Message}"); }
