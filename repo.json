@@ -1,0 +1,23 @@
+ {
+    "Author": "rail",
+    "Name": "WDIGViewer",
+    "Punchline": "A raid plan viewer",
+    "Description": "Where Do I Go? /wdig to check your spot!",
+    "Changelog": "initial release",
+    "IsHide": false,
+    "InternalName": "WDIGViewer",
+    "AssemblyVersion": "1.0.0.0",
+    "TestingAssemblyVersion": "1.0.0.0",
+    "IsTestingExclusive": false,
+    "RepoUrl": "https://github.com/rail2025/WDIGViewer",
+    "ApplicableVersion": "any",
+    "DalamudApiLevel": 12,
+    "TestingDalamudApiLevel": 12,
+    "DownloadCount": 
+    "LastUpdate": 
+    "DownloadLinkInstall": "https://github.com/rail2025/WDIGViewer/releases/download/1.0.0.0/latest.zip",
+    "DownloadLinkUpdate": "https://github.com/rail2025/WDIGViewer/releases/download/1.0.0.0/latest.zip",
+    "DownloadLinkTesting": "",
+    "SupportsProfiles": true,
+    "IconUrl": "https://raw.githubusercontent.com/rail2025/WDIGViewer/main/icon.png"
+  }
