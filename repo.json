@@ -14,8 +14,6 @@
     "ApplicableVersion": "any",
     "DalamudApiLevel": 12,
     "TestingDalamudApiLevel": 12,
-    "DownloadCount": "",
-    "LastUpdate": "",
     "DownloadLinkInstall": "https://github.com/rail2025/WDIGViewer/releases/download/1.0.0.0/latest.zip",
     "DownloadLinkUpdate": "https://github.com/rail2025/WDIGViewer/releases/download/1.0.0.0/latest.zip",
     "DownloadLinkTesting": "",
