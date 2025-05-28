@@ -1,0 +1,12 @@
+C:\Users\Shawn\Desktop\WDIGViewer project folder\WDIGViewer\WDIGViewer\bin\x64\Release\WDIGViewer.deps.json
+C:\Users\Shawn\Desktop\WDIGViewer project folder\WDIGViewer\WDIGViewer\bin\x64\Release\WDIGViewer.dll
+C:\Users\Shawn\Desktop\WDIGViewer project folder\WDIGViewer\WDIGViewer\bin\x64\Release\Microsoft.IO.RecyclableMemoryStream.dll
+C:\Users\Shawn\Desktop\WDIGViewer project folder\WDIGViewer\WDIGViewer\bin\x64\Release\SixLabors.ImageSharp.dll
+C:\Users\Shawn\Desktop\WDIGViewer project folder\WDIGViewer\WDIGViewer\bin\x64\Release\SixLabors.ImageSharp.Web.dll
+C:\Users\Shawn\Desktop\WDIGViewer project folder\WDIGViewer\WDIGViewer\obj\x64\Release\WDIGViewer.csproj.AssemblyReference.cache
+C:\Users\Shawn\Desktop\WDIGViewer project folder\WDIGViewer\WDIGViewer\obj\x64\Release\WDIGViewer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Shawn\Desktop\WDIGViewer project folder\WDIGViewer\WDIGViewer\obj\x64\Release\WDIGViewer.AssemblyInfoInputs.cache
+C:\Users\Shawn\Desktop\WDIGViewer project folder\WDIGViewer\WDIGViewer\obj\x64\Release\WDIGViewer.AssemblyInfo.cs
+C:\Users\Shawn\Desktop\WDIGViewer project folder\WDIGViewer\WDIGViewer\obj\x64\Release\WDIGViewer.csproj.CoreCompileInputs.cache
+C:\Users\Shawn\Desktop\WDIGViewer project folder\WDIGViewer\WDIGViewer\obj\x64\Release\WDIGViewer.csproj.Up2Date
+C:\Users\Shawn\Desktop\WDIGViewer project folder\WDIGViewer\WDIGViewer\obj\x64\Release\WDIGViewer.dll
