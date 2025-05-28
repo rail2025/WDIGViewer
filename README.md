@@ -1,4 +1,5 @@
-![Downloads](https://img.shields.io/github/downloads/rail2025/WDIGViewer/total)
+![Downloads](https://img.shields.io/github/downloads/rail2025/WDIGViewer/total) / ![GitHub all releases](https://img.shields.io/github/downloads/rail2025/WDIGViewer/latest/total)
+
 
 open with /wdig  <br>
 
