@@ -72,7 +72,7 @@ namespace WDIGViewer
             if (Directory.Exists(pluginImageDir)) ScanDirectoryForStrategies(pluginImageDir, ImageSourceType.Plugin);
             else { Log.Warning($"Plugin image dir not found: {pluginImageDir}. Creating."); try { Directory.CreateDirectory(pluginImageDir); } catch (Exception ex) { Log.Error($"Could not create {pluginImageDir}: {ex.Message}"); } }
             if (!string.IsNullOrEmpty(Configuration.UserImageDirectory) && Directory.Exists(Configuration.UserImageDirectory))
-            { ScanDirectoryForStrategies(Configuration.UserImageDirectory, ImageSourceType.User); }
+            { ScanDirectoryForStrategies(Configuration.UserImageDirectory, ImageSourceType.User); } //
             else if (!string.IsNullOrEmpty(Configuration.UserImageDirectory)) Log.Warning($"User image dir not found: {Configuration.UserImageDirectory}");
         }
 
@@ -84,14 +84,14 @@ namespace WDIGViewer
                 foreach (var fightDir in Directory.GetDirectories(basePath))
                 {
                     Log.Info($"Found fight directory: {fightDir}");
-                    var strategy = new FightStrategy(new DirectoryInfo(fightDir).Name, sourceType, fightDir);
+                    var strategy = new FightStrategy(new DirectoryInfo(fightDir).Name, sourceType, fightDir); //
                     var phaseDirs = Directory.GetDirectories(fightDir).OrderBy(d => d).ToList();
                     Log.Info($"-- Found {phaseDirs.Count} potential phase directories for {strategy.Name}");
 
                     foreach (var phaseDir in phaseDirs)
                     {
                         Log.Info($"---- Processing phase directory: {phaseDir}");
-                        var phase = new FightPhase(new DirectoryInfo(phaseDir).Name);
+                        var phase = new FightPhase(new DirectoryInfo(phaseDir).Name); //
                         var imageFilesInDir = Directory.GetFiles(phaseDir).ToList();
                         Log.Info($"------ Found {imageFilesInDir.Count} files in {phaseDir} before filtering.");
 
@@ -102,14 +102,14 @@ namespace WDIGViewer
                             Log.Debug($"-------- IsSupportedFile('{imageFile}') returned: {isSupported}");
                             if (isSupported)
                             {
-                                phase.Images.Add(new ImageAsset(imageFile));
+                                phase.Images.Add(new ImageAsset(imageFile)); //
                             }
                         }
                         Log.Info($"------ Phase '{phase.Name}' has {phase.Images.Count} supported images.");
 
                         if (phase.Images.Any())
                         {
-                            strategy.Phases.Add(phase);
+                            strategy.Phases.Add(phase); //
                             Log.Info($"------ Added phase '{phase.Name}' to strategy '{strategy.Name}'.");
                         }
                         else
@@ -130,12 +130,13 @@ namespace WDIGViewer
         private bool IsSupportedImageFile(string filePath)
         {
             var ext = Path.GetExtension(filePath).ToLowerInvariant();
+            // Extended to include common ImageSharp supported types that might be problematic for TextureProvider
             if (!(ext is ".jpg" or ".jpeg" or ".png" or ".webp" or ".bmp" or ".gif"))
                 return false;
             try
             {
                 using var stream = File.OpenRead(filePath);
-                return SixLabors.ImageSharp.Image.DetectFormat(stream) != null;
+                return SixLabors.ImageSharp.Image.DetectFormat(stream) != null; //
             }
             catch (Exception ex)
             {
@@ -150,47 +151,69 @@ namespace WDIGViewer
             {
                 string extension = Path.GetExtension(filePath).ToLowerInvariant();
 
-                if (extension == ".webp")
+                // Prioritize ImageSharp for common types that can be problematic with TextureProvider.GetFromFile
+                if (extension is ".webp" or ".png" or ".jpg" or ".jpeg" or ".bmp" or ".gif")
                 {
-                    Log.Verbose($"Attempting to load WebP image using ImageSharp: {filePath}");
-                    using var image = SixLabors.ImageSharp.Image.Load<Rgba32>(filePath);
-                    // image.Mutate(x => x.Flip(FlipMode.Vertical)); // Often not needed with CreateFromRaw
-
-                    var rgbaBytes = new byte[image.Width * image.Height * 4];
-                    image.CopyPixelDataTo(rgbaBytes);
-
-                    var textureWrap = TextureProvider.CreateFromRaw(RawImageSpecification.Rgba32(image.Width, image.Height), rgbaBytes);
-
-                    if (textureWrap != null)
+                    Log.Verbose($"Attempting to load image using ImageSharp: {filePath}");
+                    try
                     {
-                        Log.Verbose($"Successfully loaded WebP (via ImageSharp & CreateFromRaw): {filePath}");
+                        using var image = SixLabors.ImageSharp.Image.Load<Rgba32>(filePath); //
+                        // The necessity of flipping depends on how ImageSharp loads the format vs. how Dalamud expects raw data.
+                        // If images appear upside down, uncomment the next line.
+                        // image.Mutate(x => x.Flip(FlipMode.Vertical));
+
+                        var rgbaBytes = new byte[image.Width * image.Height * 4]; //
+                        image.CopyPixelDataTo(rgbaBytes); //
+
+                        var textureWrap = TextureProvider.CreateFromRaw(RawImageSpecification.Rgba32(image.Width, image.Height), rgbaBytes); //
+
+                        if (textureWrap != null)
+                        {
+                            Log.Verbose($"Successfully loaded image via ImageSharp & CreateFromRaw: {filePath}");
+                        }
+                        else
+                        {
+                            Log.Warning($"ImageSharp loaded but TextureProvider.CreateFromRaw failed for: {filePath}");
+                        }
+                        return textureWrap;
                     }
-                    else
+                    catch (SixLabors.ImageSharp.UnknownImageFormatException uifEx)
                     {
-                        Log.Warning($"TextureProvider.CreateFromRaw failed for WebP: {filePath}");
+                        Log.Error($"ImageSharp could not decode (UnknownImageFormatException) {filePath}: {uifEx.Message}. This specific file might be unsupported by ImageSharp or corrupted in a way it cannot handle.");
+                        return null;
                     }
-                    return textureWrap;
+                    catch (Exception ex)
+                    {
+                        Log.Error($"ImageSharp failed to load {filePath}: {ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                        // As a last resort, you could try TextureProvider.GetFromFile here for these types if ImageSharp fails,
+                        // but it's likely to fail too if ImageSharp couldn't handle it.
+                        // For now, if ImageSharp fails, we consider it a failure for this path.
+                        return null;
+                    }
                 }
                 else
                 {
-                    Log.Verbose($"Attempting to load standard image using TextureProvider: {filePath}");
+                    // Fallback to TextureProvider.GetFromFile for other/unknown extensions
+                    // This path might be used for formats like TGA if they are supported by TextureProvider directly
+                    // and not by the ImageSharp path above.
+                    Log.Verbose($"Attempting to load image using TextureProvider.GetFromFile (extension not in ImageSharp list): {filePath}");
                     var texture = TextureProvider.GetFromFile(filePath);
                     IDalamudTextureWrap? textureWrap = texture?.GetWrapOrDefault();
 
                     if (textureWrap == null)
                     {
-                        Log.Warning($"TextureProvider failed to get/wrap texture from: {filePath}. Format might not be supported or image is invalid.");
+                        Log.Warning($"TextureProvider.GetFromFile also failed for: {filePath}. Format might not be supported or image is invalid.");
                     }
                     else
                     {
-                        Log.Verbose($"Successfully loaded standard image: {filePath}");
+                        Log.Verbose($"Successfully loaded image using TextureProvider.GetFromFile: {filePath}");
                     }
                     return textureWrap;
                 }
             }
             catch (Exception ex)
             {
-                Log.Error($"Exception loading texture from {filePath}: {ex.Message}{Environment.NewLine}{ex.StackTrace}");
+                Log.Error($"Generic exception in LoadTextureFromFile for {filePath}: {ex.Message}{Environment.NewLine}{ex.StackTrace}");
                 return null;
             }
         }
@@ -210,14 +233,12 @@ namespace WDIGViewer
         private void OnCommand(string command, string args)
         {
             if (args.Trim().ToLower() == "reload") ReloadStrategies();
-            // Ensure MainWindow is accessible. If it's null due to an early error, this could fail.
-            // However, it should be initialized in the constructor.
             var mainWindowInstance = WindowSystem.Windows.FirstOrDefault(w => w.WindowName == MainWindowName) as Windows.MainWindow;
             if (mainWindowInstance != null)
             {
                 mainWindowInstance.IsOpen = true;
             }
-            else if (this.MainWindow != null) // Fallback to the direct reference if not found in WindowSystem (shouldn't happen if added)
+            else if (this.MainWindow != null)
             {
                 this.MainWindow.IsOpen = true;
             }
@@ -228,7 +249,7 @@ namespace WDIGViewer
         }
 
         private void DrawUI() => WindowSystem.Draw();
-        public void ToggleConfigUI() => ConfigWindow?.Toggle(); // Added null check for safety
-        public void ToggleMainUI() => MainWindow?.Toggle();   // Added null check for safety
+        public void ToggleConfigUI() => ConfigWindow?.Toggle();
+        public void ToggleMainUI() => MainWindow?.Toggle();
     }
-} // This is the closing brace for the namespace WDIGViewer
+}
