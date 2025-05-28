@@ -15,16 +15,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <EmbeddedResource Include="bin\x64\Debug\PluginImages\OccultCrescent\NorthHorn\1-Northhornlevellogatmacritengagement.png" />
-      <EmbeddedResource Include="bin\x64\Debug\PluginImages\OccultCrescent\NorthHorn\2-northhornmoblevels.jpeg" />
-      <EmbeddedResource Include="bin\x64\Debug\PluginImages\OccultCrescent\NorthHorn\3-northhonchestcarrotlocations.png" />
-      <EmbeddedResource Include="bin\x64\Debug\PluginImages\OccultCrescent\NorthHorn\4-atmadawntrailzones.jpeg" />
-      <EmbeddedResource Include="bin\x64\Debug\PluginImages\OccultCrescent\NorthHorn\5-atmacolordroplocation.jpeg" />
-      <EmbeddedResource Include="bin\x64\Release\PluginImages\OccultCrescent\NorthHorn\1-Northhornlevellogatmacritengagement.png" />
-      <EmbeddedResource Include="bin\x64\Release\PluginImages\OccultCrescent\NorthHorn\2-northhornmoblevels.jpeg" />
-      <EmbeddedResource Include="bin\x64\Release\PluginImages\OccultCrescent\NorthHorn\3-northhonchestcarrotlocations.png" />
-      <EmbeddedResource Include="bin\x64\Release\PluginImages\OccultCrescent\NorthHorn\4-atmadawntrailzones.jpeg" />
-      <EmbeddedResource Include="bin\x64\Release\PluginImages\OccultCrescent\NorthHorn\5-atmacolordroplocation.jpeg" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\OccultCrescent\SouthHorn\1-Southhornlevellogatmacritengagement.png" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\OccultCrescent\SouthHorn\2-Southhornmoblevels.jpeg" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\OccultCrescent\SouthHorn\3-Southhonchestcarrotlocations.png" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\OccultCrescent\SouthHorn\4-atmadawntrailzones.jpeg" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\OccultCrescent\SouthHorn\5-atmacolordroplocation.jpeg" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\OccultCrescent\SouthHorn\1-Southhornlevellogatmacritengagement.png" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\OccultCrescent\SouthHorn\2-Southhornmoblevels.jpeg" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\OccultCrescent\SouthHorn\3-Southhonchestcarrotlocations.png" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\OccultCrescent\SouthHorn\4-atmadawntrailzones.jpeg" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\OccultCrescent\SouthHorn\5-atmacolordroplocation.jpeg" />
     </ItemGroup>
 
     <ItemGroup>
