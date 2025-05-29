@@ -1,3 +1,4 @@
+https://img.shields.io/github/downloads/rail2025/WDIGViewer/total?color=brightgreen <br>
 open with /wdig  <br>
 
 Installing <br>
