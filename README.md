@@ -1,6 +1,3 @@
-![Downloads](https://img.shields.io/github/downloads/rail2025/WDIGViewer/total) / ![GitHub all releases](https://img.shields.io/github/downloads/rail2025/WDIGViewer/latest/total)
-
-
 open with /wdig  <br>
 
 Installing <br>
@@ -24,6 +21,4 @@ for example if you have some files like <br>
 C:\YOUR_CHOSEN_DIRECTORY\PluginImages\UCOB\P1\GarudaBaits.jpg, C:\YOUR_CHOSEN_DIRECTORY\PluginImages\UCOB\P2\IfritDash.jpg, <br>
 you would point the directory to C:\YOUR_CHOSEN_DIRECTORY\PluginImages\ <br>
 store in PluginImages, rename the fight to whatever you want. shows in alphanumerical file name order, so rename image files accordingly.
-/wdig to open the window  <br>
-
-![OCNH2](https://github.com/user-attachments/assets/c57ce360-b03e-4cf0-956b-56cf0177d931)
+/wdig to open the window
