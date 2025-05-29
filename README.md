@@ -22,3 +22,7 @@ C:\YOUR_CHOSEN_DIRECTORY\PluginImages\UCOB\P1\GarudaBaits.jpg, C:\YOUR_CHOSEN_DI
 you would point the directory to C:\YOUR_CHOSEN_DIRECTORY\PluginImages\ <br>
 store in PluginImages, rename the fight to whatever you want. shows in alphanumerical file name order, so rename image files accordingly.
 /wdig to open the window
+
+<bold>Occult Crescent images added:</bold> <br>
+![south](https://github.com/user-attachments/assets/e62b5f5a-c087-481e-a73f-c0756a6bc5d2) <br>
+![southmob](https://github.com/user-attachments/assets/5faa5698-79ad-47a0-8057-9f75f390a5be)
