@@ -1,3 +1,4 @@
+![GitHub all releases](https://img.shields.io/github/downloads/rail2025/WDIGViewer/total?color=brightgreen) <br>
 open with /wdig  <br>
 
 Installing <br>
@@ -8,9 +9,16 @@ https://raw.githubusercontent.com/rail2025/WDIGViewer/main/repo.json <br>
 Click on the + button and make sure the checkmark beside the new field is set afterwards. <br>
 Click on the Save-icon in the bottom right. <br>
 Enter /xlplugins in the chat window and look for WDIGViewer and install. <br>
-
-
-
+then select which strategy/folder to open:<br>
+![strategy select](https://github.com/user-attachments/assets/e0bc3686-fc6a-4818-9b39-447580739910)<br>
+<br>
+<br>
+![tab select](https://github.com/user-attachments/assets/6da1b31f-b77a-4341-90f5-fc6d47fa9124) <br>
+ <br>
+  <br>
+ ![trolling](https://github.com/user-attachments/assets/f8c04a14-b3d2-4036-ba9d-c70fc6ac12a8)
+ <br>
+  <br>
 
 
 
@@ -23,6 +31,6 @@ you would point the directory to C:\YOUR_CHOSEN_DIRECTORY\PluginImages\ <br>
 store in PluginImages, rename the fight to whatever you want. shows in alphanumerical file name order, so rename image files accordingly.
 /wdig to open the window
 
-<bold>Occult Crescent images added:</bold> <br>
+<bold>Occult Crescent images sorted into folders</bold> <br>
 ![south](https://github.com/user-attachments/assets/e62b5f5a-c087-481e-a73f-c0756a6bc5d2) <br>
 ![southmob](https://github.com/user-attachments/assets/5faa5698-79ad-47a0-8057-9f75f390a5be)
