@@ -19,6 +19,8 @@ then select which strategy/folder to open:<br>
   <br>
  ![trolling](https://github.com/user-attachments/assets/f8c04a14-b3d2-4036-ba9d-c70fc6ac12a8)
  <br>
+ whiteboard plugin is here:<br>
+ https://github.com/rail2025/AetherDraw
   <br>
 
 
