@@ -10,13 +10,13 @@ Click on the + button and make sure the checkmark beside the new field is set af
 Click on the Save-icon in the bottom right. <br>
 Enter /xlplugins in the chat window and look for WDIGViewer and install. <br>
 then select which strategy/folder to open:<br>
-![strategy select](https://github.com/user-attachments/assets/e0bc3686-fc6a-4818-9b39-447580739910)<br>
+![mainwdigscreen](https://github.com/user-attachments/assets/bdd4ee7b-3be2-4e75-938b-535c8664d937)<br>
 <br>
 <br>
-![tab select](https://github.com/user-attachments/assets/6da1b31f-b77a-4341-90f5-fc6d47fa9124) <br>
+![tab select](https://github.com/user-attachments/assets/095b7bcb-d0e0-4ccc-afa0-4025001ed8f6)<br>
  <br>
   <br>
- ![trolling](https://github.com/user-attachments/assets/f8c04a14-b3d2-4036-ba9d-c70fc6ac12a8)
+![trolling](https://github.com/user-attachments/assets/3fdb0715-97fc-4eaf-891a-8698166e7892)
  <br>
  whiteboard plugin is here:<br>
 
@@ -25,7 +25,7 @@ then select which strategy/folder to open:<br>
 
 
 
-![no phases](https://github.com/user-attachments/assets/3a9f35c8-364d-422b-9b26-92bce6bdb80e)  <br>
+![no phases](https://github.com/user-attachments/assets/71f87b25-0793-4838-924c-b03a7b4907f6)<br>
 add your own files, link to the folder with the images in the format of <br>
 C:\YOUR_CHOSEN_DIRECTORY\PluginImages\FIGHT_OR_STRAT_NAME\PHASE\IMAGE_FILE. <br>
 for example if you have some files like <br>
@@ -43,8 +43,8 @@ reload after addiing images with /wdig reload, hit the rescan button <br>
 <br>
 
 <bold>Occult Crescent images sorted into folders</bold> <br>
-![south](https://github.com/user-attachments/assets/e62b5f5a-c087-481e-a73f-c0756a6bc5d2) <br>
-![southmob](https://github.com/user-attachments/assets/5faa5698-79ad-47a0-8057-9f75f390a5be)
+![directory](https://github.com/user-attachments/assets/fa5dcc8d-839b-4195-ab0c-5bfb340d3b5c)<br>
+![questtips](https://github.com/user-attachments/assets/f5b273d6-ac2e-400a-ae5e-738d8f35a691)
 open with /wdig  <br>
 
 
