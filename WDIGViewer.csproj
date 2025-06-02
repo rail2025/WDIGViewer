@@ -1,0 +1,351 @@
+﻿<Project Sdk="Dalamud.NET.Sdk/12.0.2">
+
+    <PropertyGroup>
+        <AssemblyName>WDIGViewer</AssemblyName>
+        <RootNamespace>WDIGViewer</RootNamespace>
+        <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <TargetFramework>net9.0-windows</TargetFramework>
+        <Platforms>x64</Platforms>
+        <PlatformTarget>x64</PlatformTarget>
+        <LangVersion>latest</LangVersion>
+        <Description>A plugin to display encounter strategies.</Description>
+        <PackageProjectUrl></PackageProjectUrl>
+        <Authors>rail</Authors>
+        <Version>1.0.1.0</Version>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Compile Remove="bin\x64\Release\PluginImages\OccultCrescent\SouthHorn\**" />
+      <EmbeddedResource Remove="bin\x64\Release\PluginImages\OccultCrescent\SouthHorn\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="bin\x64\Debug\PluginImages\M5s-Hector-Conga-LPwaves-Colorpair\territory_id.txt" />
+      <Content Include="bin\x64\Debug\PluginImages\M6s-Hector-NCactus-Cleave\territory_id.txt" />
+      <Content Include="bin\x64\Debug\PluginImages\M7s-Toxic-locked-toxic\territory_id.txt" />
+      <Content Include="bin\x64\Debug\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\territory_id.txt" />
+      <Content Include="bin\x64\Debug\PluginImages\OccultCrescent\territory_id.txt" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\Forked Tower Demon Tablet - Fae Fiyaa - Balmung guide\P1 - Towers 1\1.PNG" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\Forked Tower Demon Tablet - Fae Fiyaa - Balmung guide\P1 - Towers 1\2.PNG" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\Forked Tower Demon Tablet - Fae Fiyaa - Balmung guide\P1 - Towers 1\3.PNG" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\Forked Tower Demon Tablet - Fae Fiyaa - Balmung guide\P1 - Towers 1\4.PNG" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\Forked Tower Demon Tablet - Fae Fiyaa - Balmung guide\P1 - Towers 1\5.PNG" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\Forked Tower Demon Tablet - Fae Fiyaa - Balmung guide\P1 - Towers 1\6.PNG" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\Forked Tower Demon Tablet - Fae Fiyaa - Balmung guide\P2 - Meteors\4.PNG" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\Forked Tower Demon Tablet - Fae Fiyaa - Balmung guide\P2 - Meteors\1.PNG" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\Forked Tower Demon Tablet - Fae Fiyaa - Balmung guide\P2 - Meteors\2.PNG" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\Forked Tower Demon Tablet - Fae Fiyaa - Balmung guide\P2 - Meteors\3.PNG" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\Forked Tower Demon Tablet - Fae Fiyaa - Balmung guide\P3 - Towers 2\11.PNG" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\Forked Tower Demon Tablet - Fae Fiyaa - Balmung guide\P3 - Towers 2\12.PNG" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\Forked Tower Demon Tablet - Fae Fiyaa - Balmung guide\P3 - Towers 2\13.PNG" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\Forked Tower Gob Trio - Fae Fiyaa - Balmung guide\P1- Red and Blue Slimes\1.PNG" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\Forked Tower Gob Trio - Fae Fiyaa - Balmung guide\P1- Red and Blue Slimes\2.PNG" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\Forked Tower Gob Trio - Fae Fiyaa - Balmung guide\P1- Red and Blue Slimes\3.PNG" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\Forked Tower Gob Trio - Fae Fiyaa - Balmung guide\P1- Red and Blue Slimes\4.PNG" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\Forked Tower Gob Trio - Fae Fiyaa - Balmung guide\P1- Red and Blue Slimes\5.PNG" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\Forked Tower Gob Trio - Fae Fiyaa - Balmung guide\P2 - Ice\6.PNG" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\Forked Tower Gob Trio - Fae Fiyaa - Balmung guide\P2 - Ice\7.PNG" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\Forked Tower Gob Trio - Fae Fiyaa - Balmung guide\P2 - Ice\8.PNG" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\Forked Tower Gob Trio - Fae Fiyaa - Balmung guide\P2 - Ice\9.PNG" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\Forked Tower Gob Trio - Fae Fiyaa - Balmung guide\P3 - Fire\10.PNG" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\Forked Tower Gob Trio - Fae Fiyaa - Balmung guide\P3 - Fire\11.PNG" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\Forked Tower Gob Trio - Fae Fiyaa - Balmung guide\P3 - Fire\12.PNG" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\Forked Tower Gob Trio - Fae Fiyaa - Balmung guide\P3 - Fire\13.PNG" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\Forked Tower Gob Trio - Fae Fiyaa - Balmung guide\P3 - Fire\14.PNG" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M5s-Hector-Conga-LPwaves-Colorpair\territory_id.txt" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M6s-Hector-NCactus-Cleave\territory_id.txt" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M7s-Toxic-locked-toxic\territory_id.txt" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\territory_id.txt" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\OccultCrescent\territory_id.txt" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M5s-Hector-Conga-LPwaves-Colorpair\P1\arcady-debuffs.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M5s-Hector-Conga-LPwaves-Colorpair\P1\arcady-proteans.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M5s-Hector-Conga-LPwaves-Colorpair\P1\disco-infernal-1-supports.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M5s-Hector-Conga-LPwaves-Colorpair\P1\disco-infernal-2-dps.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M5s-Hector-Conga-LPwaves-Colorpair\P1\disco-infernal-2-supports.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M5s-Hector-Conga-LPwaves-Colorpair\P1\frogtourage-1.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M5s-Hector-Conga-LPwaves-Colorpair\P1\funky-floor-2.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M5s-Hector-Conga-LPwaves-Colorpair\P1\more-amphibians-supports.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M5s-Hector-Conga-LPwaves-Colorpair\P1\ride-the-wave.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M5s-Hector-Conga-LPwaves-Colorpair\P1\twist-aside.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M5s-Hector-Conga-LPwaves-Colorpair\P1\twist-bside.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M6s-Hector-NCactus-Cleave\P1\desert-bombs.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M6s-Hector-NCactus-Cleave\P1\desert-healers.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M6s-Hector-NCactus-Cleave\P1\double-lps.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M6s-Hector-NCactus-Cleave\P1\double-partners.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M6s-Hector-NCactus-Cleave\P1\sticky.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M6s-Hector-NCactus-Cleave\P2\cleave-wave1.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M6s-Hector-NCactus-Cleave\P2\cleave-wave2.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M6s-Hector-NCactus-Cleave\P2\cleave-wave3.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M6s-Hector-NCactus-Cleave\P2\cleave-wave4.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M6s-Hector-NCactus-Cleave\P3\pudding-422.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M6s-Hector-NCactus-Cleave\P3\pudding-800.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M6s-Hector-NCactus-Cleave\P3\pudding-towers.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M6s-Hector-NCactus-Cleave\P3\river-fire.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M6s-Hector-NCactus-Cleave\P3\river-lightning.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M6s-Hector-NCactus-Cleave\P3\storm.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M7s-Toxic-locked-toxic\P1\toxic-adds.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M7s-Toxic-locked-toxic\P1\toxic-pulp.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M7s-Toxic-locked-toxic\P1\toxic-sinister-puddles.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M7s-Toxic-locked-toxic\P1\toxic-sinister-seeds.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M7s-Toxic-locked-toxic\P1\toxic-sinister.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M7s-Toxic-locked-toxic\P2\alpha-flares.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M7s-Toxic-locked-toxic\P2\alpha-swing1-spreads.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M7s-Toxic-locked-toxic\P2\alpha-swing2-spreads.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M7s-Toxic-locked-toxic\P2\alpha-swing3.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M7s-Toxic-locked-toxic\P2\locked-seeds-boss-north.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M7s-Toxic-locked-toxic\P2\locked-seeds.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M7s-Toxic-locked-toxic\P2\locked-stacks-boss-north.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M7s-Toxic-locked-toxic\P2\locked-stacks-boss-south.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M7s-Toxic-locked-toxic\P3\toxic-debris-melee-puddles-proteans.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M7s-Toxic-locked-toxic\P3\toxic-debris-melee-puddles-stack.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M7s-Toxic-locked-toxic\P3\toxic-debris-melee-puddles.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M7s-Toxic-locked-toxic\P3\toxic-debris-ranged-puddles-proteans.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M7s-Toxic-locked-toxic\P3\toxic-debris-ranged-puddles-stack.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M7s-Toxic-locked-toxic\P3\toxic-debris-ranged-puddles.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M7s-Toxic-locked-toxic\P3\toxic-debris-stacks.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M7s-Toxic-locked-toxic\P3\toxic-debris-tethers.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M7s-Toxic-locked-toxic\P3\toxic-stoneringers1-spread.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M7s-Toxic-locked-toxic\P3\toxic-stoneringers2-supports.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\10clock-terrestrial-2.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\11quad-moonlight-1.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\12toxic-quake3.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\13toxic-uv.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\14toxic-twinbite.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\15toxic-hero.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\16toxic-mooncleaver.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\17gale-original.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\18twofold-tethers-original.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\19twofold-lines-original.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\1toxic-windfang.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\20toxic-champions.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\21rinon-lament-start.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\22rinon-lament-tethers.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\23rinon-uv4.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\24toxic-enrage.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\2toxic-stonefang.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\3toxic-eminent.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\4toxic-revolutionary.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\5fer-decay-start.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\6fer-decay-spreads.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\7fer-decay-towers.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\8toxic-adds.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\9clock-terrestrial-1.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P2\12toxic-quake3.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P2\13toxic-uv.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P2\14toxic-twinbite.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P2\15toxic-hero.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P2\16toxic-mooncleaver.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P2\17gale-original.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P2\18twofold-tethers-original.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P2\19twofold-lines-original.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P2\20toxic-champions.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P2\21rinon-lament-start.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P2\22rinon-lament-tethers.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P2\23rinon-uv4.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P2\24toxic-enrage.webp" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\OccultCrescent\Forked Tower prog plans\thisisntreal.PNG" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\OccultCrescent\AtmaFarm Misc Info\1-namecolormapatma.PNG" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\OccultCrescent\AtmaFarm Misc Info\2-dawntrailatmalocations.PNG" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\OccultCrescent\AtmaFarm Misc Info\4-atmadawntrailzones.jpeg" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\OccultCrescent\AtmaFarm Misc Info\5-atmacolordroplocation.jpeg" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\OccultCrescent\AtmaFarm Misc Info\6-quest.JPG" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\OccultCrescent\AtmaFarm Misc Info\6-quest.PNG" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\OccultCrescent\ChestCarrotJar Locations\3-Southhonchestcarrotlocations.png" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\OccultCrescent\LogFateCEMobLevel Locations\1-Southhornlevellogatmacritengagement.png" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\OccultCrescent\LogFateCEMobLevel Locations\2-Southhornmoblevels.jpeg" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\OccultCrescent\AtmaFarm Misc Info\1-namecolormapatma.PNG" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\OccultCrescent\AtmaFarm Misc Info\2-dawntrailatmalocations.PNG" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\OccultCrescent\AtmaFarm Misc Info\4-atmadawntrailzones.jpeg" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\OccultCrescent\AtmaFarm Misc Info\5-atmacolordroplocation.jpeg" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\OccultCrescent\AtmaFarm Misc Info\6-quest.JPG" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\OccultCrescent\AtmaFarm Misc Info\6-quest.PNG" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\OccultCrescent\ChestCarrotJar Locations\3-Southhonchestcarrotlocations.png" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\OccultCrescent\Forked Tower prog plans\thisisntreal.PNG" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\OccultCrescent\LogFateCEMobLevel Locations\1-Southhornlevellogatmacritengagement.png" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\OccultCrescent\LogFateCEMobLevel Locations\2-Southhornmoblevels.jpeg" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\OccultCrescent\SouthHorn\1-Southhornlevellogatmacritengagement.png" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\OccultCrescent\SouthHorn\2-Southhornmoblevels.jpeg" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\OccultCrescent\SouthHorn\3-Southhonchestcarrotlocations.png" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\OccultCrescent\SouthHorn\4-atmadawntrailzones.jpeg" />
+      <EmbeddedResource Include="bin\x64\Debug\PluginImages\OccultCrescent\SouthHorn\5-atmacolordroplocation.jpeg" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M5s-Hector-Conga-LPwaves-Colorpair\P1\arcady-debuffs.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M5s-Hector-Conga-LPwaves-Colorpair\P1\arcady-proteans.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M5s-Hector-Conga-LPwaves-Colorpair\P1\disco-infernal-1-supports.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M5s-Hector-Conga-LPwaves-Colorpair\P1\disco-infernal-2-dps.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M5s-Hector-Conga-LPwaves-Colorpair\P1\disco-infernal-2-supports.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M5s-Hector-Conga-LPwaves-Colorpair\P1\frogtourage-1.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M5s-Hector-Conga-LPwaves-Colorpair\P1\funky-floor-2.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M5s-Hector-Conga-LPwaves-Colorpair\P1\more-amphibians-supports.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M5s-Hector-Conga-LPwaves-Colorpair\P1\ride-the-wave.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M5s-Hector-Conga-LPwaves-Colorpair\P1\twist-aside.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M5s-Hector-Conga-LPwaves-Colorpair\P1\twist-bside.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M6s-Hector-NCactus-Cleave\P1\desert-bombs.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M6s-Hector-NCactus-Cleave\P1\desert-healers.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M6s-Hector-NCactus-Cleave\P1\double-lps.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M6s-Hector-NCactus-Cleave\P1\double-partners.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M6s-Hector-NCactus-Cleave\P1\sticky.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M6s-Hector-NCactus-Cleave\P2\cleave-wave1.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M6s-Hector-NCactus-Cleave\P2\cleave-wave2.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M6s-Hector-NCactus-Cleave\P2\cleave-wave3.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M6s-Hector-NCactus-Cleave\P2\cleave-wave4.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M6s-Hector-NCactus-Cleave\P3\pudding-422.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M6s-Hector-NCactus-Cleave\P3\pudding-800.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M6s-Hector-NCactus-Cleave\P3\pudding-towers.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M6s-Hector-NCactus-Cleave\P3\river-fire.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M6s-Hector-NCactus-Cleave\P3\river-lightning.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M6s-Hector-NCactus-Cleave\P3\storm.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M7s-Toxic-locked-toxic\P1\toxic-adds.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M7s-Toxic-locked-toxic\P1\toxic-pulp.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M7s-Toxic-locked-toxic\P1\toxic-sinister-puddles.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M7s-Toxic-locked-toxic\P1\toxic-sinister-seeds.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M7s-Toxic-locked-toxic\P1\toxic-sinister.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M7s-Toxic-locked-toxic\P2\alpha-flares.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M7s-Toxic-locked-toxic\P2\alpha-swing1-spreads.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M7s-Toxic-locked-toxic\P2\alpha-swing2-spreads.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M7s-Toxic-locked-toxic\P2\alpha-swing3.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M7s-Toxic-locked-toxic\P2\locked-seeds-boss-north.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M7s-Toxic-locked-toxic\P2\locked-seeds.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M7s-Toxic-locked-toxic\P2\locked-stacks-boss-north.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M7s-Toxic-locked-toxic\P2\locked-stacks-boss-south.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M7s-Toxic-locked-toxic\P3\toxic-debris-melee-puddles-proteans.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M7s-Toxic-locked-toxic\P3\toxic-debris-melee-puddles-stack.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M7s-Toxic-locked-toxic\P3\toxic-debris-melee-puddles.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M7s-Toxic-locked-toxic\P3\toxic-debris-ranged-puddles-proteans.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M7s-Toxic-locked-toxic\P3\toxic-debris-ranged-puddles-stack.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M7s-Toxic-locked-toxic\P3\toxic-debris-ranged-puddles.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M7s-Toxic-locked-toxic\P3\toxic-debris-stacks.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M7s-Toxic-locked-toxic\P3\toxic-debris-tethers.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M7s-Toxic-locked-toxic\P3\toxic-stoneringers1-spread.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M7s-Toxic-locked-toxic\P3\toxic-stoneringers2-supports.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\10clock-terrestrial-2.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\11quad-moonlight-1.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\12toxic-quake3.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\13toxic-uv.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\14toxic-twinbite.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\15toxic-hero.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\16toxic-mooncleaver.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\17gale-original.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\18twofold-tethers-original.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\19twofold-lines-original.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\1toxic-windfang.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\20toxic-champions.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\21rinon-lament-start.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\22rinon-lament-tethers.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\23rinon-uv4.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\24toxic-enrage.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\2toxic-stonefang.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\3toxic-eminent.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\4toxic-revolutionary.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\5fer-decay-start.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\6fer-decay-spreads.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\7fer-decay-towers.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\8toxic-adds.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P1\9clock-terrestrial-1.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P2\12toxic-quake3.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P2\13toxic-uv.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P2\14toxic-twinbite.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P2\15toxic-hero.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P2\16toxic-mooncleaver.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P2\17gale-original.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P2\18twofold-tethers-original.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P2\19twofold-lines-original.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P2\20toxic-champions.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P2\21rinon-lament-start.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P2\22rinon-lament-tethers.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P2\23rinon-uv4.webp" />
+      <EmbeddedResource Include="bin\x64\Release\PluginImages\M8s-Toxic-fering-clock-quad-rinonUV4\P2\24toxic-enrage.webp" />
+      <None Include="PluginImages\M5s\P1\arcady-debuffs.webp" />
+      <None Include="PluginImages\M5s\P1\arcady-proteans.webp" />
+      <None Include="PluginImages\M5s\P1\disco-infernal-1-supports.webp" />
+      <None Include="PluginImages\M5s\P1\disco-infernal-2-dps.webp" />
+      <None Include="PluginImages\M5s\P1\disco-infernal-2-supports.webp" />
+      <None Include="PluginImages\M5s\P1\frogtourage-1.webp" />
+      <None Include="PluginImages\M5s\P1\funky-floor-2.webp" />
+      <None Include="PluginImages\M5s\P1\more-amphibians-supports.webp" />
+      <None Include="PluginImages\M5s\P1\ride-the-wave.webp" />
+      <None Include="PluginImages\M5s\P1\twist-aside.webp" />
+      <None Include="PluginImages\M5s\P1\twist-bside.webp" />
+      <None Include="PluginImages\M5s\P2\arcady-debuffs.webp" />
+      <None Include="PluginImages\M6s\P1\desert-bombs.webp" />
+      <None Include="PluginImages\M6s\P1\desert-healers.webp" />
+      <None Include="PluginImages\M6s\P1\double-lps.webp" />
+      <None Include="PluginImages\M6s\P1\double-partners.webp" />
+      <None Include="PluginImages\M6s\P1\sticky.webp" />
+      <EmbeddedResource Include="PluginImages\M6s\P2\cleave-wave1.webp" />
+      <None Include="PluginImages\M6s\P2\cleave-wave2.webp" />
+      <None Include="PluginImages\M6s\P2\cleave-wave3.webp" />
+      <None Include="PluginImages\M6s\P2\cleave-wave4.webp" />
+      <EmbeddedResource Include="PluginImages\M6s\P3\pudding-422.webp" />
+      <None Include="PluginImages\M6s\P3\pudding-800.webp" />
+      <None Include="PluginImages\M6s\P3\pudding-towers.webp" />
+      <None Include="PluginImages\M6s\P3\river-fire.webp" />
+      <None Include="PluginImages\M6s\P3\river-lightning.webp" />
+      <None Include="PluginImages\M6s\P3\storm.webp" />
+      <None Include="PluginImages\M7s\P1\toxic-adds.webp" />
+      <None Include="PluginImages\M7s\P1\toxic-pulp.webp" />
+      <None Include="PluginImages\M7s\P1\toxic-sinister-puddles.webp" />
+      <None Include="PluginImages\M7s\P1\toxic-sinister-seeds.webp" />
+      <None Include="PluginImages\M7s\P1\toxic-sinister.webp" />
+      <None Include="PluginImages\M7s\P2\alpha-flares.webp" />
+      <None Include="PluginImages\M7s\P2\alpha-swing1-spreads.webp" />
+      <None Include="PluginImages\M7s\P2\alpha-swing2-spreads.webp" />
+      <None Include="PluginImages\M7s\P2\alpha-swing3.webp" />
+      <None Include="PluginImages\M7s\P2\locked-seeds-boss-north.webp" />
+      <None Include="PluginImages\M7s\P2\locked-seeds.webp" />
+      <None Include="PluginImages\M7s\P2\locked-stacks-boss-north.webp" />
+      <None Include="PluginImages\M7s\P2\locked-stacks-boss-south.webp" />
+      <None Include="PluginImages\M7s\P3\toxic-debris-melee-puddles-proteans.webp" />
+      <None Include="PluginImages\M7s\P3\toxic-debris-melee-puddles-stack.webp" />
+      <None Include="PluginImages\M7s\P3\toxic-debris-melee-puddles.webp" />
+      <None Include="PluginImages\M7s\P3\toxic-debris-ranged-puddles-proteans.webp" />
+      <None Include="PluginImages\M7s\P3\toxic-debris-ranged-puddles-stack.webp" />
+      <None Include="PluginImages\M7s\P3\toxic-debris-ranged-puddles.webp" />
+      <None Include="PluginImages\M7s\P3\toxic-debris-stacks.webp" />
+      <None Include="PluginImages\M7s\P3\toxic-debris-tethers.webp" />
+      <None Include="PluginImages\M7s\P3\toxic-stoneringers1-spread.webp" />
+      <None Include="PluginImages\M7s\P3\toxic-stoneringers2-supports.webp" />
+      <None Include="PluginImages\M8s\P1\clock-terrestrial-1.webp" />
+      <None Include="PluginImages\M8s\P1\clock-terrestrial-2.webp" />
+      <None Include="PluginImages\M8s\P1\fer-decay-spreads.webp" />
+      <None Include="PluginImages\M8s\P1\fer-decay-start.webp" />
+      <None Include="PluginImages\M8s\P1\fer-decay-towers.webp" />
+      <None Include="PluginImages\M8s\P1\quad-moonlight-1.webp" />
+      <None Include="PluginImages\M8s\P1\toxic-adds.webp" />
+      <None Include="PluginImages\M8s\P1\toxic-eminent.webp" />
+      <None Include="PluginImages\M8s\P1\toxic-revolutionary.webp" />
+      <None Include="PluginImages\M8s\P1\toxic-stonefang.webp" />
+      <None Include="PluginImages\M8s\P1\toxic-windfang.webp" />
+      <None Include="PluginImages\M8s\P2\gale-original.webp" />
+      <None Include="PluginImages\M8s\P2\rinon-lament-start.webp" />
+      <None Include="PluginImages\M8s\P2\rinon-lament-tethers.webp" />
+      <None Include="PluginImages\M8s\P2\rinon-uv4.webp" />
+      <None Include="PluginImages\M8s\P2\toxic-champions.webp" />
+      <None Include="PluginImages\M8s\P2\toxic-enrage.webp" />
+      <None Include="PluginImages\M8s\P2\toxic-hero.webp" />
+      <None Include="PluginImages\M8s\P2\toxic-mooncleaver.webp" />
+      <None Include="PluginImages\M8s\P2\toxic-quake3.webp" />
+      <None Include="PluginImages\M8s\P2\toxic-twinbite.webp" />
+      <None Include="PluginImages\M8s\P2\toxic-uv.webp" />
+      <None Include="PluginImages\M8s\P2\twofold-lines-original.webp" />
+      <None Include="PluginImages\M8s\P2\twofold-tethers-original.webp" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="SixLabors.ImageSharp" Version="3.1.8" />
+        <PackageReference Include="SixLabors.ImageSharp.Web" Version="3.1.5" />
+        
+    </ItemGroup>
+
+</Project>
