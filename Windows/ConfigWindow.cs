@@ -1,4 +1,3 @@
-// Windows/ConfigWindow.cs
 using Dalamud.Interface.Windowing;
 using ImGuiNET;
 using System;

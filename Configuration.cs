@@ -1,4 +1,3 @@
-// Configuration.cs
 using Dalamud.Configuration;
 using Dalamud.Plugin;
 using System;
@@ -72,7 +71,7 @@ namespace WDIGViewer
 
         public FightPhase(string name) { Name = name; }
 
-        public void LoadImages(Func<string, IDalamudTextureWrap?> textureLoader)
+        public void LoadImages(Func<string, IDalamudTextureWrap?> textureLoader, ImageSourceType strategySourceType) // Added strategySourceType parameter
         {
             foreach (var imageAsset in Images)
             {
@@ -81,13 +80,42 @@ namespace WDIGViewer
                 imageAsset.Width = 0;
                 imageAsset.Height = 0;
 
-                if (!string.IsNullOrEmpty(imageAsset.FilePath) && System.IO.File.Exists(imageAsset.FilePath))
+                if (!string.IsNullOrEmpty(imageAsset.FilePath))
                 {
-                    imageAsset.TextureWrap = textureLoader(imageAsset.FilePath);
-                    if (imageAsset.TextureWrap != null)
+                    bool attemptLoad = false;
+                    if (strategySourceType == ImageSourceType.User)
                     {
-                        imageAsset.Width = imageAsset.TextureWrap.Width;
-                        imageAsset.Height = imageAsset.TextureWrap.Height;
+                        attemptLoad = System.IO.File.Exists(imageAsset.FilePath);
+                        if (!attemptLoad)
+                        {
+                            // Add a log here if Plugin.Log is accessible or pass a logger
+                            // Plugin.Log.Warning($"User image file not found: {imageAsset.FilePath}");
+                        }
+                    }
+                    else if (strategySourceType == ImageSourceType.Plugin)
+                    {
+                        // For embedded resources, the FilePath is the resource identifier.
+                        // The check for actual existence is handled by the textureLoader returning null if it can't load it.
+                        attemptLoad = true;
+                    }
+                    // Add other source types like ImageSourceType.Internet if needed
+
+                    if (attemptLoad)
+                    {
+                        imageAsset.TextureWrap = textureLoader(imageAsset.FilePath);
+                        if (imageAsset.TextureWrap != null)
+                        {
+                            imageAsset.Width = imageAsset.TextureWrap.Width;
+                            imageAsset.Height = imageAsset.TextureWrap.Height;
+                        }
+                        else
+                        {
+                            // Log failure if needed, especially for embedded resources
+                            // if (strategySourceType == ImageSourceType.Plugin)
+                            // {
+                            //     Plugin.Log.Warning($"Failed to load texture for embedded resource: {imageAsset.FilePath}");
+                            // }
+                        }
                     }
                 }
             }

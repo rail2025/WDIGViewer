@@ -1,4 +1,3 @@
-// Windows/MainWindow.cs
 using Dalamud.Interface.Windowing;
 using ImGuiNET;
 using System;
@@ -40,6 +39,8 @@ namespace WDIGViewer.Windows
         }
 
         public void Dispose() { }
+
+     
 
         public void UpdateStrategies(List<FightStrategy> newStrategies)
         {
@@ -290,8 +291,9 @@ namespace WDIGViewer.Windows
         /// </summary>
         private void LoadImagesForCurrentPhase()
         {
-            // Delegates to the FightPhase object's LoadImages method, passing the plugin's texture loading function.
-            currentPhase?.LoadImages(pluginInstance.LoadTextureFromFile);
+            if (selectedStrategy == null || currentPhase == null) return; // Check if selectedStrategy is null
+                                                                          // Pass the source type of the currently selected strategy
+            currentPhase?.LoadImages(pluginInstance.LoadTextureFromFile, selectedStrategy.Source);
         }
 
         /// <summary>
