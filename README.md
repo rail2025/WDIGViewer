@@ -1,5 +1,4 @@
-![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/rail2025/WDIGViewer/total?label=Warriors%20of%20Light%20that%20now%20know%20where%20to%20go%3A%20&color=brown)
-<br>
+![GitHub all releases](https://img.shields.io/github/downloads/rail2025/WDIGViewer/total?color=brightgreen) <br>
 open with /wdig  <br>
 Auto loads current savage tier when you launch the viewer, as well as Occult Crescent!<br>
 Installing <br>
@@ -35,9 +34,9 @@ you would point the directory to C:\YOUR_CHOSEN_DIRECTORY\PluginImages\ <br>
 store in PluginImages, rename the fight to whatever you want. shows in alphanumerical file name order, so rename image files accordingly.<br>
 WTFDIGViewer will also attempt to auto load baseed on the zone/duty you are in and the folder name, so if you use the official name of the duty/area, or at least as close as possible, it will load the folder correctly.
 
-<br>IMPORTANT!!
+<br># IMPORTANT!!
 <br>
-reload after addiing images with /wdig reload, hit the rescan button <br>
+reload after addiing images with /wdig reload,or hit the rescan button <br>
 <br>
 <br>
 <br>

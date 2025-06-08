@@ -3,6 +3,7 @@ using ImGuiNET;
 using System;
 using System.Numerics;
 using Dalamud.Interface.ImGuiFileDialog; // Correct using for FileDialogManager
+using Dalamud.Utility; // Added for Util.OpenLink
 
 namespace WDIGViewer.Windows
 {
@@ -24,7 +25,7 @@ namespace WDIGViewer.Windows
                          ImGuiWindowFlags.NoScrollbar |
                          ImGuiWindowFlags.NoScrollWithMouse;
 
-            this.Size = new Vector2(450, 220); // Slightly increased height for browse button
+            this.Size = new Vector2(450, 260); // Increased height for the new button
             this.SizeCondition = ImGuiCond.Always;
         }
 
@@ -36,29 +37,8 @@ namespace WDIGViewer.Windows
             // this.fileDialogManager.Reset(); 
         }
 
-        public override void PreDraw()
-        {
-            if (configuration.IsConfigWindowMovable)
-            {
-                this.Flags &= ~ImGuiWindowFlags.NoMove;
-            }
-            else
-            {
-                this.Flags |= ImGuiWindowFlags.NoMove;
-            }
-        }
-
         public override void Draw()
         {
-            var movable = configuration.IsConfigWindowMovable;
-            if (ImGui.Checkbox("Movable Config Window", ref movable))
-            {
-                configuration.IsConfigWindowMovable = movable;
-                configuration.Save();
-            }
-
-            ImGui.Spacing(); ImGui.Separator(); ImGui.Spacing();
-
             ImGui.Text("User Image Directory:");
             float browseButtonWidth = ImGui.CalcTextSize("Browse...").X + ImGui.GetStyle().FramePadding.X * 2;
             float reloadButtonWidth = ImGui.CalcTextSize("Reload Images").X + ImGui.GetStyle().FramePadding.X * 2;
@@ -100,6 +80,26 @@ namespace WDIGViewer.Windows
             ImGui.Spacing();
             ImGui.TextWrapped("Set the root path to your custom image folder.");
             ImGui.TextWrapped("Expected structure: YourFolder/StrategyName/PhaseName/image.[ext]");
+
+            ImGui.Spacing();
+            ImGui.Separator();
+            ImGui.Spacing();
+
+            // Support Button
+            string buttonText = "Donate & Support";
+            uint buttonColor = 0xFF312B; // A reddish color
+            float btnWidthFull = ImGui.GetContentRegionAvail().X;
+
+            ImGui.PushStyleColor(ImGuiCol.Button, 0xFF000000 | buttonColor);
+            ImGui.PushStyleColor(ImGuiCol.ButtonActive, 0xDD000000 | buttonColor);
+            ImGui.PushStyleColor(ImGuiCol.ButtonHovered, 0xAA000000 | buttonColor);
+
+            if (ImGui.Button(buttonText))
+            {
+                Util.OpenLink("https://ko-fi.com/rail2025");
+            }
+
+            ImGui.PopStyleColor(3);
 
             // CRITICAL: The FileDialogManager's Draw method must be called for it to function.
             this.fileDialogManager.Draw();
