@@ -1,4 +1,6 @@
-![GitHub all releases](https://img.shields.io/github/downloads/rail2025/WDIGViewer/total?color=brightgreen) <br>
+![GitHub all releases](https://img.shields.io/github/downloads/rail2025/WDIGViewer/total?label=Warriors%20of%20Light%20that%20now%20know%20Where%20Do%20They%20Go&color=brightgreen) <br>
+![GitHub Downloads (all assets, latest release)](https://img.shields.io/github/downloads/rail2025/WDIGViewer/latest/total?label=Up-to%20date%20Warriors%20of%20Light&color=magenta)<br>
+
 open with /wdig  <br>
 Auto loads current savage tier when you launch the viewer, as well as Occult Crescent!<br>
 Installing <br>
