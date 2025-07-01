@@ -5,12 +5,11 @@ open with /wdig  <br>
 Auto loads current savage tier when you launch the viewer, as well as Occult Crescent!<br>
 Installing <br>
 Enter /xlsettings in the chat window and go to the Experimental tab in the opening window.  <br>
-Skip below the DevPlugins section to the Custom Plugin Repositories section. <br>
-Copy and paste the repo.json link into the first free text input field. <br>
-https://raw.githubusercontent.com/rail2025/WDIGViewer/main/repo.json <br>
-Click on the + button and make sure the checkmark beside the new field is set afterwards. <br>
+Click the get testing builds: <br>
+![testing builds](https://github.com/user-attachments/assets/8fe0a02f-b47b-47a7-bfea-56cef466bf95)<br>
+
 Click on the Save-icon in the bottom right. <br>
-Enter /xlplugins in the chat window and look for WDIGViewer and install. <br>
+Enter /xlplugins in the chat window and look for WDIGViewer under the Testing Available and install. <br>
 then select which strategy/folder to open:<br>
 ![mainwdigscreen](https://github.com/user-attachments/assets/bdd4ee7b-3be2-4e75-938b-535c8664d937)<br>
 <br>
