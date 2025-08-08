@@ -14,6 +14,7 @@ using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using Lumina.Excel.Sheets;      // For TerritoryType, ContentFinderCondition etc.
 using Lumina.Text;             // Required for SeString (ReadOnlySeString)
+using System.Text.RegularExpressions;
 
 namespace WDIGViewer
 {
@@ -233,7 +234,7 @@ namespace WDIGViewer
                 foreach (var phaseEntry in phaseResources.OrderBy(kvp => kvp.Key)) // Process phases alphabetically
                 {
                     var phase = new FightPhase(phaseEntry.Key);
-                    foreach (var imageResourceName in phaseEntry.Value.OrderBy(f => f)) // Add images in alphabetical order of their resource name
+                    foreach (var imageResourceName in phaseEntry.Value.OrderBy(f => Regex.Replace(f, @"\d+", m => m.Value.PadLeft(10, '0')))) // Add images in numerical alphabetical order of their resource name
                     {
                         phase.Images.Add(new ImageAsset(imageResourceName));
                     }
@@ -287,7 +288,7 @@ namespace WDIGViewer
                     {
                         var phase = new FightPhase(new DirectoryInfo(phaseDir).Name);
                         // Iterate over files in the phase folder (each is an Image)
-                        foreach (var imageFile in Directory.GetFiles(phaseDir).OrderBy(f => f))
+                        foreach (var imageFile in Directory.GetFiles(phaseDir).OrderBy(f => Regex.Replace(f, @"\d+", m => m.Value.PadLeft(10, '0'))))
                         {
                             if (IsSupportedImageFile(imageFile))
                             {

@@ -1,5 +1,5 @@
 using Dalamud.Interface.Windowing;
-using ImGuiNET;
+using Dalamud.Bindings.ImGui;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -328,60 +328,63 @@ namespace WDIGViewer.Windows
             ImageAsset? imageAsset = currentPhase.GetCurrentImage(); // Retrieve the current image asset to display.
 
             // Check if the image asset and its texture are valid and loaded.
-            if (imageAsset?.TextureWrap?.ImGuiHandle != null && imageAsset.TextureWrap.ImGuiHandle != IntPtr.Zero)
+            if (imageAsset?.TextureWrap is { } textureWrap)
             {
-                IntPtr textureHandle = imageAsset.TextureWrap.ImGuiHandle; // Get the ImGui texture handle.
-                float imgWidth = imageAsset.Width;   // Original width of the image.
-                float imgHeight = imageAsset.Height; // Original height of the image.
-
-                // Ensure image dimensions are valid to prevent division by zero or rendering errors.
-                if (imgWidth == 0 || imgHeight == 0)
+                var textureHandle = textureWrap.Handle;
+                if (textureHandle.Handle != (ulong)IntPtr.Zero)
                 {
-                    ImGui.TextColored(new Vector4(1, 0, 0, 1), $"Image dimensions are zero for {Path.GetFileName(imageAsset.FilePath)}.");
-                    return;
+                    float imgWidth = imageAsset.Width;   // Original width of the image.
+                    float imgHeight = imageAsset.Height; // Original height of the image.
+
+                    // Ensure image dimensions are valid to prevent division by zero or rendering errors.
+                    if (imgWidth == 0 || imgHeight == 0)
+                    {
+                        ImGui.TextColored(new Vector4(1, 0, 0, 1), $"Image dimensions are zero for {Path.GetFileName(imageAsset.FilePath)}.");
+                        return;
+                    }
+
+                    Vector2 contentSize = ImGui.GetContentRegionAvail(); // Get the available size in the current ImGui region.
+                                                                         // If there are multiple images in this phase, reserve space at the bottom for pagination controls.
+                    if (currentPhase.Images.Count > 1)
+                    {
+                        contentSize.Y -= (ImGui.GetFrameHeightWithSpacing() + ImGui.GetStyle().ItemSpacing.Y);
+                    }
+                    // Ensure contentSize.Y is positive to avoid issues with aspect ratio calculation.
+                    if (contentSize.Y <= 0) contentSize.Y = 1f;
+
+
+                    float aspectRatio = imgWidth / imgHeight; // Calculate the image's aspect ratio.
+                                                              // Calculate display size: fit to width initially, maintaining aspect ratio.
+                    Vector2 displaySize = new Vector2(contentSize.X, contentSize.X / aspectRatio);
+
+                    // If calculated height (based on fitting to width) exceeds available content height, then fit to height instead.
+                    if (displaySize.Y > contentSize.Y)
+                    {
+                        displaySize.Y = contentSize.Y;
+                        displaySize.X = contentSize.Y * aspectRatio;
+                    }
+                    // Ensure display dimensions are at least 1x1 pixel to prevent rendering issues.
+                    displaySize.X = Math.Max(1f, displaySize.X);
+                    displaySize.Y = Math.Max(1f, displaySize.Y);
+
+                    // Calculate horizontal position to center the image.
+                    float cursorPosX = (contentSize.X - displaySize.X) * 0.5f;
+                    if (cursorPosX > 0)
+                    {
+                        ImGui.SetCursorPosX(ImGui.GetCursorPosX() + cursorPosX);
+                    }
+
+                    // Calculate vertical position to center the image within the adjusted available height.
+                    float availableDrawingHeight = contentSize.Y; // This height is already reduced if pagination is present.
+                    float cursorPosY = (availableDrawingHeight - displaySize.Y) * 0.5f;
+                    // Only adjust Y cursor if there's space to center and centering is meaningful.
+                    if (cursorPosY > 0 && availableDrawingHeight > displaySize.Y)
+                    {
+                        ImGui.SetCursorPosY(ImGui.GetCursorPosY() + cursorPosY);
+                    }
+
+                    ImGui.Image(textureHandle, displaySize); // Draw the image.
                 }
-
-                Vector2 contentSize = ImGui.GetContentRegionAvail(); // Get the available size in the current ImGui region.
-                // If there are multiple images in this phase, reserve space at the bottom for pagination controls.
-                if (currentPhase.Images.Count > 1)
-                {
-                    contentSize.Y -= (ImGui.GetFrameHeightWithSpacing() + ImGui.GetStyle().ItemSpacing.Y);
-                }
-                // Ensure contentSize.Y is positive to avoid issues with aspect ratio calculation.
-                if (contentSize.Y <= 0) contentSize.Y = 1f;
-
-
-                float aspectRatio = imgWidth / imgHeight; // Calculate the image's aspect ratio.
-                // Calculate display size: fit to width initially, maintaining aspect ratio.
-                Vector2 displaySize = new Vector2(contentSize.X, contentSize.X / aspectRatio);
-
-                // If calculated height (based on fitting to width) exceeds available content height, then fit to height instead.
-                if (displaySize.Y > contentSize.Y)
-                {
-                    displaySize.Y = contentSize.Y;
-                    displaySize.X = contentSize.Y * aspectRatio;
-                }
-                // Ensure display dimensions are at least 1x1 pixel to prevent rendering issues.
-                displaySize.X = Math.Max(1f, displaySize.X);
-                displaySize.Y = Math.Max(1f, displaySize.Y);
-
-                // Calculate horizontal position to center the image.
-                float cursorPosX = (contentSize.X - displaySize.X) * 0.5f;
-                if (cursorPosX > 0)
-                {
-                    ImGui.SetCursorPosX(ImGui.GetCursorPosX() + cursorPosX);
-                }
-
-                // Calculate vertical position to center the image within the adjusted available height.
-                float availableDrawingHeight = contentSize.Y; // This height is already reduced if pagination is present.
-                float cursorPosY = (availableDrawingHeight - displaySize.Y) * 0.5f;
-                // Only adjust Y cursor if there's space to center and centering is meaningful.
-                if (cursorPosY > 0 && availableDrawingHeight > displaySize.Y)
-                {
-                    ImGui.SetCursorPosY(ImGui.GetCursorPosY() + cursorPosY);
-                }
-
-                ImGui.Image(textureHandle, displaySize); // Draw the image.
             }
             else if (imageAsset != null) // If there's an image asset, but its texture isn't loaded/valid.
             {
