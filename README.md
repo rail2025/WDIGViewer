@@ -48,4 +48,6 @@ reload after addiing images with /wdig reload,or hit the rescan button <br>
 ![questtips](https://github.com/user-attachments/assets/f5b273d6-ac2e-400a-ae5e-738d8f35a691)
 open with /wdig  <br>
 
+All art, text, logos, videos, screenshots, images, sounds, music and recordings from FINAL FANTASY XIV are © SQUARE ENIX CO., LTD. All rights reserved. This content is not affiliated with Square Enix. The in-game assets are used under the FINAL FANTASY XIV Materials Usage License.
+
 
