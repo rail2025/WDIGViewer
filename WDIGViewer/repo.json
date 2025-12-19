@@ -1,0 +1,24 @@
+[
+ {
+    "Author": "rail",
+    "Name": "WDIGViewer",
+    "Punchline": "A raid plan viewer, also to look at cats",
+    "Description": "Where Do I Go? /wdig to check your spot! An image viewer plugin so you don't have to alt-tab or use a second monitor to reference guides or images while in game.'",
+    "Changelog": "v1.0.4.0: API 14, 7.4, ex6\nv1.0.3.1: API 13/patch 7.3 support, EX 5 uptime strat added",
+    "IsHide": false,
+    "InternalName": "WDIGViewer",
+    "AssemblyVersion": "1.0.4.1",
+    "TestingAssemblyVersion": "1.0.4.1",
+    "IsTestingExclusive": false,
+    "RepoUrl": "https://github.com/rail2025/WDIGViewer",
+    "ApplicableVersion": "any",
+    "DalamudApiLevel": 14,
+    "TestingDalamudApiLevel": 14,
+    "LoadPriority": 0,
+    "DownloadLinkInstall": "https://github.com/rail2025/WDIGViewer/releases/download/v1.0.4.1/latest.zip",
+    "DownloadLinkUpdate": "https://github.com/rail2025/WDIGViewer/releases/download/v1.0.4.1/latest.zip",
+    "DownloadLinkTesting": "",
+    "SupportsProfiles": true,
+    "IconUrl": "https://raw.githubusercontent.com/rail2025/WDIGViewer/main/icon.png"
+  }
+]
