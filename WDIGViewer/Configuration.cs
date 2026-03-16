@@ -88,7 +88,6 @@ namespace WDIGViewer
                         attemptLoad = System.IO.File.Exists(imageAsset.FilePath);
                         if (!attemptLoad)
                         {
-                            // Add a log here if Plugin.Log is accessible or pass a logger
                             // Plugin.Log.Warning($"User image file not found: {imageAsset.FilePath}");
                         }
                     }
@@ -98,8 +97,6 @@ namespace WDIGViewer
                         // The check for actual existence is handled by the textureLoader returning null if it can't load it.
                         attemptLoad = true;
                     }
-                    // Add other source types like ImageSourceType.Internet if needed
-
                     if (attemptLoad)
                     {
                         imageAsset.TextureWrap = textureLoader(imageAsset.FilePath);
@@ -138,7 +135,7 @@ namespace WDIGViewer
         public ImageSourceType Source { get; set; }
         public List<FightPhase> Phases { get; set; } = new();
         public string RootPath { get; set; }
-        public ushort? MetadataTerritoryTypeId { get; set; } // ADDED: For metadata-based Territory ID matching
+        public ushort? MetadataTerritoryTypeId { get; set; }
         private bool disposedValue;
 
         public FightStrategy(string name, ImageSourceType source, string rootPath = "")
@@ -146,7 +143,7 @@ namespace WDIGViewer
             Name = name;
             Source = source;
             RootPath = rootPath;
-            MetadataTerritoryTypeId = null; // Initialize
+            MetadataTerritoryTypeId = null;
         }
 
         protected virtual void Dispose(bool disposing)

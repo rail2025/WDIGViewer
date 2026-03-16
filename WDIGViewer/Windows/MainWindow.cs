@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Numerics;
-// No direct using for Plugin.Log needed if calling static Plugin.Log from Plugin.cs
 
 namespace WDIGViewer.Windows
 {
@@ -22,7 +21,7 @@ namespace WDIGViewer.Windows
         private int currentPhaseImageIndex = 0;
 
         // Note: ControlsSectionWidth is no longer the primary driver for the new layout logic for the top row,
-        // as button widths are now calculated dynamically in Draw().
+        // button widths are now calculated dynamically in Draw().
         // private const float ControlsSectionWidth = 220f; 
 
         public MainWindow(Plugin plugin, List<FightStrategy> initialStrategies)
@@ -33,14 +32,24 @@ namespace WDIGViewer.Windows
             this.SizeConstraints = new WindowSizeConstraints
             {
                 MinimumSize = new Vector2(500, 550), // Minimum window size
-                MaximumSize = new Vector2(float.MaxValue, float.MaxValue) // Allow window to be resized freely
+                MaximumSize = new Vector2(float.MaxValue, float.MaxValue)
             };
-            this.Flags = ImGuiWindowFlags.NoScrollWithMouse; // Disable mouse wheel scrolling for the window itself
+            this.Flags = ImGuiWindowFlags.NoScrollWithMouse;
         }
 
         public void Dispose() { }
+        public void NavigatePrevious()
+        {
+            if (currentPhase != null && currentPhase.Images.Count > 1 && currentPhaseImageIndex > 0)
+                currentPhaseImageIndex--;
+        }
 
-     
+        public void NavigateNext()
+        {
+            if (currentPhase != null && currentPhase.Images.Count > 1 && currentPhaseImageIndex < currentPhase.Images.Count - 1)
+                currentPhaseImageIndex++;
+        }
+
 
         public void UpdateStrategies(List<FightStrategy> newStrategies)
         {
@@ -53,13 +62,7 @@ namespace WDIGViewer.Windows
             currentPhaseImageIndex = 0;
         }
 
-        /// <summary>
-        /// Programmatically selects a strategy by its name.
-        /// Used for auto-selection based on zone/duty or command arguments.
-        /// </summary>
-        /// <param name="strategyName">The name of the strategy to select (case-insensitive).</param>
-        /// <param name="filterSourceType">Optional: Filter by a specific ImageSourceType.</param>
-        public void SelectStrategyByName(string strategyName, ImageSourceType? filterSourceType = null)
+         public void SelectStrategyByName(string strategyName, ImageSourceType? filterSourceType = null)
         {
             if (string.IsNullOrEmpty(strategyName)) return;
 
@@ -410,9 +413,9 @@ namespace WDIGViewer.Windows
                 string pageText = $"{currentPhaseImageIndex + 1} / {currentPhase.Images.Count}"; // e.g., "1 / 3"
 
                 // Calculate total width needed for pagination controls to center them.
-                float prevButtonWidth = ImGui.CalcTextSize("Previous").X + ImGui.GetStyle().FramePadding.X * 2;
+                float prevButtonWidth = ImGui.CalcTextSize("Previous (CTRL + <-)").X + ImGui.GetStyle().FramePadding.X * 2;
                 float pageTextWidth = ImGui.CalcTextSize(pageText).X;
-                float nextButtonWidth = ImGui.CalcTextSize("Next").X + ImGui.GetStyle().FramePadding.X * 2;
+                float nextButtonWidth = ImGui.CalcTextSize("Next (CTRL + ->)").X + ImGui.GetStyle().FramePadding.X * 2;
                 float spacing = ImGui.GetStyle().ItemSpacing.X;
                 float pageControlsTotalWidth = prevButtonWidth + spacing + pageTextWidth + spacing + nextButtonWidth;
 
@@ -423,18 +426,18 @@ namespace WDIGViewer.Windows
                     ImGui.SetCursorPosX(ImGui.GetCursorPosX() + indentX);
                 }
 
-                if (ImGui.Button("Previous"))
+                if (ImGui.Button("Previous (CTRL+ <-)"))
                 {
                     if (currentPhaseImageIndex > 0) currentPhaseImageIndex--; // Go to previous image if not on the first.
                 }
                 ImGui.SameLine();
                 ImGui.TextUnformatted(pageText); // Display current page number out of total.
-                ImGui.SameLine();
-                if (ImGui.Button("Next"))
+                ImGui.SameLine(); 
+                if (ImGui.Button("Next (CTRL + ->)"))
                 {
                     if (currentPhaseImageIndex < currentPhase.Images.Count - 1) currentPhaseImageIndex++; // Go to next image if not on the last.
                 }
             }
         }
     }
-}
+} 

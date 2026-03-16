@@ -4,7 +4,7 @@
     "Name": "WDIGViewer",
     "Punchline": "A raid plan viewer, also to look at cats",
     "Description": "Where Do I Go? /wdig to check your spot! An image viewer plugin so you don't have to alt-tab or use a second monitor to reference guides or images while in game.'",
-    "Changelog": "v1.0.4.0: API 14, 7.4, ex6\nv1.0.3.1: API 13/patch 7.3 support, EX 5 uptime strat added",
+    "Changelog": "v1.0.4.1: M9-12s added, previous tier removed\nv1.0.4.0: API 14, 7.4, ex6\nv1.0.3.1: API 13/patch 7.3 support, EX 5 uptime strat added",
     "IsHide": false,
     "InternalName": "WDIGViewer",
     "AssemblyVersion": "1.0.4.1",

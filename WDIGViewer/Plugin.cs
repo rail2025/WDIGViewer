@@ -13,16 +13,15 @@ using Dalamud.Interface.Textures.TextureWraps;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using Lumina.Excel.Sheets;      // For TerritoryType, ContentFinderCondition etc.
-using Lumina.Text;             // Required for SeString (ReadOnlySeString)
+using Lumina.Text; 
 using System.Text.RegularExpressions;
+using Dalamud.Game.ClientState.Keys;
 
 namespace WDIGViewer
 {
     public sealed class Plugin : IDalamudPlugin
     {
         public string Name => "WDIGViewer";
-
-        // Dalamud Services
         [PluginService] internal static IDalamudPluginInterface PluginInterface { get; private set; } = null!;
         [PluginService] internal static ICommandManager CommandManager { get; private set; } = null!;
         [PluginService] internal static IPluginLog Log { get; private set; } = null!;
@@ -30,6 +29,8 @@ namespace WDIGViewer
         [PluginService] internal static IClientState ClientState { get; private set; } = null!;
         [PluginService] internal static IDataManager DataManager { get; private set; } = null!;
         [PluginService] internal static IDutyState DutyState { get; private set; } = null!;
+        [PluginService] internal static IFramework Framework { get; private set; } = null!;
+        [PluginService] internal static IKeyState KeyState { get; private set; } = null!;
 
         public Configuration Configuration { get; init; }
         public readonly WindowSystem WindowSystem = new("WDIGViewer");
@@ -37,19 +38,15 @@ namespace WDIGViewer
         private Windows.MainWindow MainWindow { get; init; }
 
         public List<FightStrategy> AllStrategies { get; private set; } = new List<FightStrategy>();
+        private bool _leftKeyWasDown = false;
+        private bool _rightKeyWasDown = false;
 
-        // Constants
         private const string CommandName = "/wdig";
-        private const string PluginImageFolderName = "PluginImages"; // Used to construct resource paths
-        private const string MainWindowName = "WDIGViewer##WDIGViewerMain"; // Unique ID for the main window
+        private const string PluginImageFolderName = "PluginImages"; 
+        private const string MainWindowName = "WDIGViewer##WDIGViewerMain"; 
 
-        // The root path for embedded image resources within the assembly.
         private readonly string resourcePathPrefix;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Plugin"/> class.
-        /// Sets up configuration, loads initial strategies, initializes windows, and registers commands.
-        /// </summary>
         public Plugin()
         {
             Configuration = PluginInterface.GetPluginConfig() as Configuration ?? new Configuration();
@@ -69,18 +66,58 @@ namespace WDIGViewer
             CommandManager.AddHandler(CommandName, new CommandInfo(OnCommand)
             { HelpMessage = "Opens WDIGViewer. Use '/wdig reload' to rescan images. '/wdig <strategy name>' to attempt to open specific strategy." });
 
-            // Subscribe to Dalamud UI events
             PluginInterface.UiBuilder.Draw += DrawUI;
             PluginInterface.UiBuilder.OpenConfigUi += ToggleConfigUI;
             PluginInterface.UiBuilder.OpenMainUi += ToggleMainUI;
+            Framework.Update += OnFrameworkUpdate;
 
             Log.Information("WDIGViewer Plugin Loaded.");
         }
 
-        /// <summary>
-        /// Reloads all fight strategies from embedded resources and user-defined directories.
-        /// Clears existing strategies and rescans. Updates the main window.
-        /// </summary>
+
+        private void OnFrameworkUpdate(IFramework framework)
+        {
+            if (MainWindow == null || !MainWindow.IsOpen) return;
+
+            bool isModifierDown = KeyState[VirtualKey.CONTROL] || KeyState[VirtualKey.SHIFT];
+
+            if (isModifierDown)
+            {
+                if (KeyState[VirtualKey.LEFT])
+                {
+                    if (!_leftKeyWasDown)
+                    {
+                        MainWindow.NavigatePrevious();
+                        _leftKeyWasDown = true;
+                    }
+                    KeyState[VirtualKey.LEFT] = false;
+                }
+                else
+                {
+                    _leftKeyWasDown = false;
+                }
+
+                if (KeyState[VirtualKey.RIGHT])
+                {
+                    if (!_rightKeyWasDown)
+                    {
+                        MainWindow.NavigateNext();
+                        _rightKeyWasDown = true;
+
+                    }
+                    KeyState[VirtualKey.RIGHT] = false;
+                }
+                else
+                {
+                    _rightKeyWasDown = false;
+                }
+            }
+            else
+            {
+                _leftKeyWasDown = false;
+                _rightKeyWasDown = false;
+            }
+        }
         public void ReloadStrategies()
         {
             Log.Information("Reloading strategies...");
@@ -92,9 +129,6 @@ namespace WDIGViewer
             Log.Information("Strategies reloaded.");
         }
 
-        /// <summary>
-        /// Loads strategies from both embedded plugin resources and user-specified directories.
-        /// </summary>
         private void LoadStrategies()
         {
             LoadEmbeddedPluginStrategies();
@@ -105,42 +139,28 @@ namespace WDIGViewer
             }
             else if (!string.IsNullOrEmpty(Configuration.UserImageDirectory))
             {
-                // Log a warning if the user-specified directory is set but not found.
+                // Log if the user-specified directory is set but not found.
                 Log.Warning($"User image directory not found: {Configuration.UserImageDirectory}");
             }
         }
-
-        /// <summary>
-        /// Converts mangled resource name segments (used for folder/file names that become part of resource paths)
-        /// back to a more display-friendly format. E.g., "My___Fight_Strategy" becomes "My - Fight Strategy".
-        /// </summary>
-        /// <param name="segment">The mangled segment string.</param>
-        /// <returns>An unmangled string suitable for display.</returns>
         private string UnmangleResourceSegment(string segment)
         {
             return segment.Replace("___", " - ").Replace("_", " ");
         }
 
-        /// <summary>
-        /// Scans the executing assembly for embedded resources that represent plugin-defined fight strategies.
-        /// Populates the AllStrategies list with found strategies.
-        /// Expected resource structure: Namespace.PluginImageFolderName.StrategyName.PhaseName.ImageFile.ext
-        /// Also looks for an optional "territory_id.txt" in each strategy's resource path for auto-matching.
-        /// </summary>
         private void LoadEmbeddedPluginStrategies()
         {
             Log.Info($"Scanning embedded resources for Plugin strategies with prefix: {resourcePathPrefix}");
             var assembly = Assembly.GetExecutingAssembly();
             var allResourceNames = assembly.GetManifestResourceNames();
 
-            // Group resources by the first segment after the prefix (assumed to be the mangled strategy name)
             var resourcesByMangledStrategy = new Dictionary<string, List<string>>();
             foreach (var resourceName in allResourceNames)
             {
                 if (resourceName.StartsWith(resourcePathPrefix))
                 {
                     string pathAfterPrefix = resourceName.Substring(resourcePathPrefix.Length);
-                    string[] parts = pathAfterPrefix.Split(new[] { '.' }, 2); // Split only on the first dot to get strategy segment
+                    string[] parts = pathAfterPrefix.Split(new[] { '.' }, 2);
                     if (parts.Length > 0)
                     {
                         string mangledStrategySegment = parts[0];
@@ -160,7 +180,7 @@ namespace WDIGViewer
             {
                 string actualMangledStrategyName = stratEntry.Key;
                 string strategyDisplayName = UnmangleResourceSegment(actualMangledStrategyName);
-                string strategyResourcePathBase = resourcePathPrefix + actualMangledStrategyName + "."; // Base path for resources under this strategy
+                string strategyResourcePathBase = resourcePathPrefix + actualMangledStrategyName + ".";
 
                 var strategy = new FightStrategy(strategyDisplayName, ImageSourceType.Plugin, strategyResourcePathBase);
 
@@ -200,7 +220,7 @@ namespace WDIGViewer
                 var phaseResources = new Dictionary<string, List<string>>();
                 foreach (var fullResourceName in stratEntry.Value)
                 {
-                    if (fullResourceName.Equals(territoryIdResourceFullName, StringComparison.OrdinalIgnoreCase)) continue; // Skip metadata file
+                    if (fullResourceName.Equals(territoryIdResourceFullName, StringComparison.OrdinalIgnoreCase)) continue;
 
                     if (fullResourceName.StartsWith(strategyResourcePathBase))
                     {
@@ -220,7 +240,7 @@ namespace WDIGViewer
                                 {
                                     phaseResources[phaseDisplayName] = new List<string>();
                                 }
-                                phaseResources[phaseDisplayName].Add(fullResourceName); // Store the full resource name as FilePath
+                                phaseResources[phaseDisplayName].Add(fullResourceName);
                             }
                         }
                         else
@@ -230,7 +250,6 @@ namespace WDIGViewer
                     }
                 }
 
-                // Create phases and add images
                 foreach (var phaseEntry in phaseResources.OrderBy(kvp => kvp.Key)) // Process phases alphabetically
                 {
                     var phase = new FightPhase(phaseEntry.Key);
@@ -268,26 +287,17 @@ namespace WDIGViewer
             }
         }
 
-        /// <summary>
-        /// Scans a given directory for fight strategies organized in subfolders.
-        /// Expected structure: basePath/StrategyName/PhaseName/image.[ext]
-        /// </summary>
-        /// <param name="basePath">The root directory to scan.</param>
-        /// <param name="sourceType">The source type of these strategies (e.g., User).</param>
         private void ScanDirectoryForStrategies(string basePath, ImageSourceType sourceType)
         {
             try
             {
                 Log.Info($"Scanning base path: {basePath} for source type: {sourceType}");
-                // Iterate over subdirectories in the base path (each is a Strategy)
                 foreach (var fightDir in Directory.GetDirectories(basePath).OrderBy(d => d))
                 {
                     var strategy = new FightStrategy(new DirectoryInfo(fightDir).Name, sourceType, fightDir);
-                    // Iterate over subdirectories in the strategy folder (each is a Phase)
                     foreach (var phaseDir in Directory.GetDirectories(fightDir).OrderBy(d => d))
                     {
                         var phase = new FightPhase(new DirectoryInfo(phaseDir).Name);
-                        // Iterate over files in the phase folder (each is an Image)
                         foreach (var imageFile in Directory.GetFiles(phaseDir).OrderBy(f => Regex.Replace(f, @"\d+", m => m.Value.PadLeft(10, '0'))))
                         {
                             if (IsSupportedImageFile(imageFile))
@@ -316,18 +326,11 @@ namespace WDIGViewer
             catch (Exception ex) { Log.Error($"Error scanning {basePath}: {ex.Message}"); }
         }
 
-        /// <summary>
-        /// Checks if a given file path points to a supported image file format.
-        /// </summary>
-        /// <param name="filePath">The path to the file.</param>
-        /// <returns>True if the file is a supported image type, false otherwise.</returns>
         private bool IsSupportedImageFile(string filePath)
         {
             var ext = Path.GetExtension(filePath).ToLowerInvariant();
-            // Check against a list of common supported extensions
             if (!new[] { ".jpg", ".jpeg", ".png", ".webp", ".bmp", ".gif", ".tga" }.Contains(ext)) return false;
 
-            // Further validation by trying to detect format using ImageSharp (more reliable)
             try
             {
                 using var stream = File.OpenRead(filePath);
@@ -340,14 +343,9 @@ namespace WDIGViewer
             }
         }
 
-        /// <summary>
-        /// Loads a texture from either an embedded resource or the file system.
-        /// </summary>
-        /// <param name="identifier">For embedded resources, this is the manifest resource name. For file system, this is the full file path.</param>
-        /// <returns>An <see cref="IDalamudTextureWrap"/> if successful, otherwise null.</returns>
         public IDalamudTextureWrap? LoadTextureFromFile(string identifier)
         {
-            // Enable the following Log.Debug lines if troubleshooting texture loading issues.
+            // Log.Debug lines to troubleshoot texture loading issues.
             // Log.Debug($"[LOAD TEXTURE ATTEMPT] Identifier received: '{identifier}'");
 
             bool isEmbeddedResource = !string.IsNullOrEmpty(identifier) && identifier.StartsWith(resourcePathPrefix);
@@ -439,13 +437,7 @@ namespace WDIGViewer
             }
         }
 
-        /// <summary>
-        /// Handles the execution of the "/wdig" command.
-        /// Can toggle the main UI, reload strategies, or attempt to open a specific strategy.
-        /// </summary>
-        /// <param name="command">The command string.</param>
-        /// <param name="args">The arguments passed to the command.</param>
-        private void OnCommand(string command, string args)
+         private void OnCommand(string command, string args)
         {
             string trimmedArgs = args.Trim();
             var mainWindowInstance = WindowSystem.Windows.FirstOrDefault(w => w.WindowName == MainWindowName) as Windows.MainWindow ?? this.MainWindow;
@@ -571,26 +563,18 @@ namespace WDIGViewer
                     mainWindowInstance?.SelectStrategyByName(strategyNameToSelect, sourceFilter);
                 }
             }
-            ToggleMainUI(); // Always toggle main UI after command execution
+            ToggleMainUI();
         }
 
-        /// <summary>
-        /// Draws all registered windows in the WindowSystem.
-        /// </summary>
         private void DrawUI() => WindowSystem.Draw();
 
-        /// <summary> Toggles the visibility of the configuration window. </summary>
         public void ToggleConfigUI() => ConfigWindow?.Toggle();
 
-        /// <summary> Toggles the visibility of the main application window. </summary>
         public void ToggleMainUI() => MainWindow?.Toggle();
 
-        /// <summary>
-        /// Disposes of resources used by the plugin.
-        /// Removes windows, disposes strategies, unregisters commands, and unsubscribes from UI events.
-        /// </summary>
         public void Dispose()
         {
+            Framework.Update -= OnFrameworkUpdate;
             WindowSystem.RemoveAllWindows();
 
             foreach (var strategy in AllStrategies)

@@ -8,7 +8,7 @@
         <Platforms>x64</Platforms>
         <PlatformTarget>x64</PlatformTarget>
         <LangVersion>latest</LangVersion>
-        <Description>A plugin to display encounter strategies, or cats.</Description>
+        <Description>A plugin to display encounter strategy image guides, or cats.</Description>
         <PackageProjectUrl></PackageProjectUrl>
         <Authors>rail</Authors>
         <Version>1.0.4.1</Version>
@@ -25,7 +25,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Update="DalamudPackager" Version="14.0.1" />
       <PackageReference Update="DotNet.ReproducibleBuilds" Version="1.2.39" />
     </ItemGroup>
 
